@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ConnectionFragment">
+    tools:context="g54490.mobg5.sharestudent.ConnectionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size24"
+            android:layout_marginTop="104dp"
+            android:layout_marginRight="@dimen/size24"
+            android:text="@string/welcomeText"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size34"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/EmailAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size24"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="@dimen/size24"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/example_gmail_com"
+            android:inputType="textEmailAddress"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/size24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/button_connect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size24"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="@dimen/size24"
+            android:background="@color/purple_700"
+            android:text="@string/connexion"
+            android:textSize="@dimen/size24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EmailAddress" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
