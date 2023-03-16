@@ -3,6 +3,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcomeText">welcome</string>
     <string name="example_gmail_com">example@gmail.com</string>
-    <string name="connexion">connexion</string>
+    <string name="matricule">Matricule : G54490</string>
+    <string name="name">Nom : Fouefack Atchepong</string>
+    <string name="firstName">Prénom : Vivace Jibrice</string>
+    <string name="connexion">connection</string>
+    <string name="valideToastText">valid address</string>
+    <string name="invalideToastText">invalid address</string>
     <string name="about">About</string>
 </resources>

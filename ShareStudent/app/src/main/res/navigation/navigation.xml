@@ -10,4 +10,9 @@
         android:name="g54490.mobg5.sharestudent.ConnectionFragment"
         android:label="fragment_connection"
         tools:layout="@layout/fragment_connection" />
+    <fragment
+        android:id="@+id/aboutFragment2"
+        android:name="g54490.mobg5.sharestudent.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
