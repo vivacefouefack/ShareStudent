@@ -10,7 +10,6 @@ import androidx.navigation.ui.NavigationUI
 import g54490.mobg5.sharestudent.databinding.FragmentConnectionBinding
 
 class ConnectionFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
