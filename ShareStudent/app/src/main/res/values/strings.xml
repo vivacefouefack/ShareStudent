@@ -10,4 +10,5 @@
     <string name="valideToastText">valid address</string>
     <string name="invalideToastText">invalid address</string>
     <string name="about">About</string>
+    <string name="login">Login</string>
 </resources>
