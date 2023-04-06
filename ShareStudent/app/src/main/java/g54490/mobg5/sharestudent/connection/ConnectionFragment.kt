@@ -1,4 +1,4 @@
-package g54490.mobg5.sharestudent
+package g54490.mobg5.sharestudent.connection
 
 import android.os.Bundle
 import android.view.*
@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentConnectionBinding
 
 class ConnectionFragment : Fragment() {
