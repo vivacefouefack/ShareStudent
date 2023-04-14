@@ -11,8 +11,8 @@
         android:label="@string/login"
         tools:layout="@layout/fragment_connection" />
     <fragment
-        android:id="@+id/aboutFragment2"
+        android:id="@+id/aboutFragment"
         android:name="g54490.mobg5.sharestudent.AboutFragment"
-        android:label="fragment_about"
+        android:label="About"
         tools:layout="@layout/fragment_about" />
 </navigation>

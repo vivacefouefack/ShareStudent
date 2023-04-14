@@ -9,6 +9,8 @@
     <string name="connexion">connection</string>
     <string name="valideToastText">valid address</string>
     <string name="invalideToastText">invalid address</string>
+    <string name="insertToastText">add new user</string>
+    <string name="updateToastText">update user</string>
     <string name="about">About</string>
     <string name="login">Login</string>
 </resources>

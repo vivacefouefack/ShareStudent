@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.Date
 
 @Entity(tableName = "user")
 data class User(
@@ -11,9 +13,9 @@ data class User(
     var emailAdress: String,
 
     @ColumnInfo(name = "registrationTime")
-    val registrationTime: Long = System.currentTimeMillis(),
+    val registrationTime: Long,
 
-    @ColumnInfo(name = "end_time_milli")
-    var registrationDate: LocalDate =LocalDate.now()
+    @ColumnInfo(name = "registrationDate")
+    var registrationDate: Long
 
 )

@@ -2,13 +2,19 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="g54490.mobg5.sharestudent.connection.ConnectionFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="connectionViewModel"
+            type="g54490.mobg5.sharestudent.connection.ConnectionViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="g54490.mobg5.sharestudent.connection.ConnectionFragment">
 
         <TextView
             android:id="@+id/welcome_text"
