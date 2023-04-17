@@ -1,4 +1,4 @@
-package g54490.mobg5.sharestudent.connection
+package g54490.mobg5.sharestudent.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

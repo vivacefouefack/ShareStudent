@@ -19,4 +19,5 @@
     <string name="connexionText">Login</string>
     <string name="registerPage">Register</string>
     <string name="confirm_passwordText">confirm password</string>
+    <string name="createPub">créer une publication</string>
 </resources>

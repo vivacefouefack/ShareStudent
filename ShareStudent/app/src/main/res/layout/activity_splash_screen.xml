@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_700"
-    tools:context=".connection.SplashScreen">
+    tools:context=".view.SplashScreen">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_share_24" />
+        app:srcCompat="@android:drawable/ic_menu_share"  />
 
     <TextView
         android:id="@+id/splashScreen_name"

@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/connectionFragment">
+    app:startDestination="@id/home2">
 
     <fragment
-        android:id="@+id/connectionFragment"
-        android:name="g54490.mobg5.sharestudent.connection.ConnectionFragment"
-        android:label="@string/login"
-        tools:layout="@layout/fragment_connection" />
+        android:id="@+id/home2"
+        android:name="g54490.mobg5.sharestudent.view.Home"
+        android:label="share student"
+        tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="g54490.mobg5.sharestudent.AboutFragment"
+        android:name="g54490.mobg5.sharestudent.view.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+
 </navigation>

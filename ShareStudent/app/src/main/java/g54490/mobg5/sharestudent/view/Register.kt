@@ -1,19 +1,14 @@
-package g54490.mobg5.sharestudent.connection
+package g54490.mobg5.sharestudent.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.ActivityRegisterBinding
-import g54490.mobg5.sharestudent.viewmodel.LoginViewModel
 import g54490.mobg5.sharestudent.viewmodel.RegisterViewModel
 import g54490.mobg5.sharestudent.viewmodel.RegisterViewModelFactory
 
