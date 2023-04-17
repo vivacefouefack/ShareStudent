@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import g54490.mobg5.sharestudent.R
@@ -26,29 +27,27 @@ class Register : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         binding=  DataBindingUtil.setContentView<g54490.mobg5.sharestudent.databinding.ActivityRegisterBinding>(this,R.layout.activity_register)
 
-        binding.registerBt.setOnClickListener {
-            registerViewModel.setEmailAndPasswordAndConfirm(binding.emailInputEt.text.toString(),
-            binding.passwordInputEt.text.toString(),binding.confirmPasswordInputEt.text.toString())
-
-            if (registerViewModel.checkIsOkData()){
-                auth.createUserWithEmailAndPassword(binding.emailInputEt.text.toString(), binding.passwordInputEt.text.toString()).addOnCompleteListener {
-                    if(it.isSuccessful) {
-                        Toast.makeText(this@Register, "new user", Toast.LENGTH_LONG).show()
-                        finish()
-                    } else {
-                        Toast.makeText(this@Register, "error try again! ", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }else{
-                binding.emailInputEt.setError("")
-                binding.passwordInputEt.setError("")
-                binding.confirmPasswordInputEt.setError("")
+        binding.registerViewModel=registerViewModel
+        registerViewModel.createUser.observe(this, Observer {
+            if (it==true){
+                Toast.makeText(this@Register, "new user", Toast.LENGTH_LONG).show()
+                binding.emailInputEt.text=null
+                binding.passwordInputEt.text=null
+                binding.confirmPasswordInputEt.text=null
+                finish()
             }
-        }
+            if (it==false){
+                binding.emailInputEt.error = ""
+                binding.passwordInputEt.error = ""
+                binding.confirmPasswordInputEt.error = ""
+            }
+        })
 
-        binding.backImg.setOnClickListener{
-            val intent= Intent(this,Login::class.java)
-            startActivity(intent)
-        }
+        registerViewModel.backToLoginUi.observe(this, Observer {
+            if (it==true){
+                val intent= Intent(this,Login::class.java)
+                startActivity(intent)
+            }
+        })
     }
 }
