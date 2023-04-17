@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="loginViewModel"
+            type="g54490.mobg5.sharestudent.viewmodel.LoginViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginPage"
         android:layout_width="match_parent"
@@ -38,6 +44,7 @@
             android:drawableStart="@drawable/baseline_email_24"
             android:ems="10"
             android:hint="@string/example_gmail_com"
+            android:onTextChanged="@{loginViewModel::emailEnter}"
             android:inputType="textEmailAddress"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
@@ -76,6 +83,7 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/password"
+            android:onTextChanged="@{loginViewModel::passwordEnter}"
             android:inputType="textPassword"
             android:drawableStart="@drawable/baseline_lock_24"
             android:minHeight="48dp"

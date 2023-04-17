@@ -17,4 +17,3 @@ class ConnectionViewModelFactory(private val application: Application,
     }
 
 }
-//fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
