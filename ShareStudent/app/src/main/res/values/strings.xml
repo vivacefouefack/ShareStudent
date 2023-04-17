@@ -20,4 +20,8 @@
     <string name="registerPage">Register</string>
     <string name="confirm_passwordText">confirm password</string>
     <string name="createPub">créer une publication</string>
+    <string name="d_connexion">déconnexion</string>
+    <string name="publications">publications</string>
+    <string name="profil">profil</string>
+    <string name="messageries">messageries</string>
 </resources>
