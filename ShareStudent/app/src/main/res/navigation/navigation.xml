@@ -9,12 +9,21 @@
         android:id="@+id/home2"
         android:name="g54490.mobg5.sharestudent.view.Home"
         android:label="share student"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_addPublication2"
+            app:destination="@id/addPublication2" />
+    </fragment>
 
     <fragment
         android:id="@+id/aboutFragment"
         android:name="g54490.mobg5.sharestudent.view.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/addPublication2"
+        android:name="g54490.mobg5.sharestudent.view.AddPublication"
+        android:label="publier un objet"
+        tools:layout="@layout/fragment_add_publication"/>
 
 </navigation>

@@ -24,4 +24,7 @@
     <string name="publications">publications</string>
     <string name="profil">profil</string>
     <string name="messageries">messageries</string>
+    <string name="add_publication">add publication</string>
+    <string name="textAjoutObjet">Ajouter une image de l\'objet</string>
+    <string name="publier">PUBLIER</string>
 </resources>
