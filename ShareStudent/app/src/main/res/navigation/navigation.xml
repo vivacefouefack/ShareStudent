@@ -24,6 +24,12 @@
         android:id="@+id/addPublication2"
         android:name="g54490.mobg5.sharestudent.view.AddPublication"
         android:label="publier un objet"
-        tools:layout="@layout/fragment_add_publication"/>
+        tools:layout="@layout/fragment_add_publication">
+        <action
+            android:id="@+id/action_addPublication2_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@+id/home2"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="loginViewModel"
-            type="g54490.mobg5.sharestudent.viewmodel.LoginViewModel" />
+            name="addViewModel"
+            type="g54490.mobg5.sharestudent.viewmodel.AddViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/baseline_add_24"
+            android:src="@drawable/livre2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +59,7 @@
                 android:id="@+id/titre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onTextChanged="@{addViewModel::titleText}"
                 android:hint="titre" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +78,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onTextChanged="@{addViewModel::descriptionText}"
                 android:hint="description" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,6 +92,7 @@
             android:text="@string/publier"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:onClick="@{() -> addViewModel.checkData()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.03"
             app:layout_constraintStart_toStartOf="parent"
