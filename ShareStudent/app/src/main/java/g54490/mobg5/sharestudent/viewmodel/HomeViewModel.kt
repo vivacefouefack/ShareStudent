@@ -15,9 +15,22 @@ class HomeViewModel:ViewModel() {
     val addButton: LiveData<Boolean?>
         get() = _addButton
 
+    private val _navigateToPublicationDetail = MutableLiveData<Int>()
+    val navigateToPublicationDetail
+        get() = _navigateToPublicationDetail
+
+    fun onPublicationClicked(id: Int) {
+        _navigateToPublicationDetail.value = id
+    }
+
+    fun onPublicationDetailNavigated() {
+        _navigateToPublicationDetail.value = null
+    }
+
     init {
         _allPublication.value=null
         _addButton.value=null
+        //_navigateToPublicationDetail.value=1
         getData()
     }
 

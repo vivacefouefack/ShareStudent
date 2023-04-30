@@ -42,7 +42,7 @@ class AddViewModel:ViewModel() {
         if(_title.value.toString().isNotEmpty() && _description.value.toString().isNotEmpty()){
 
             this._publishButton.value=true
-            HomeViewModel().addPublication(Publication(1,title.value.toString(),description.value.toString()))
+            HomeViewModel().addPublication(Publication(1,title.value.toString(),description.value.toString() ))
         }else{
             _publishButton.value=false
         }

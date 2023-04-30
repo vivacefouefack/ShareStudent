@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_home2_to_addPublication2"
             app:destination="@id/addPublication2" />
+        <action
+            android:id="@+id/action_home2_to_publicationDetail"
+            app:destination="@id/publicationDetail" />
     </fragment>
 
     <fragment
@@ -23,13 +26,22 @@
     <fragment
         android:id="@+id/addPublication2"
         android:name="g54490.mobg5.sharestudent.view.AddPublication"
-        android:label="publier un objet"
+        android:label="Créer une publication"
         tools:layout="@layout/fragment_add_publication">
         <action
             android:id="@+id/action_addPublication2_to_home2"
             app:destination="@id/home2"
             app:popUpTo="@+id/home2"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/publicationDetail"
+        android:name="g54490.mobg5.sharestudent.view.PublicationDetail"
+        android:label="Détail"
+        tools:layout="@layout/fragment_publication_detail">
+        <action
+            android:id="@+id/action_publicationDetail_to_home2"
+            app:destination="@id/home2" />
     </fragment>
 
 </navigation>

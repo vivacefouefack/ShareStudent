@@ -23,14 +23,17 @@ class Home : Fragment() {
         val homeViewModelFactory=HomeViewModelFactory()
         homeViewModel=ViewModelProvider(this,homeViewModelFactory)[HomeViewModel::class.java]
 
-        val adapter = PublicationAdapter()
+        val adapter = PublicationAdapter(PublicationListener { publicationId ->
+            homeViewModel.onPublicationClicked(publicationId)
+        })
+
         binding.publicationList.adapter= adapter
         binding.lifecycleOwner = this
         binding.homeViewModel=homeViewModel
 
         homeViewModel.allPublication.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data=it
+                adapter.submitList(it)
             }
         })
 
@@ -40,6 +43,17 @@ class Home : Fragment() {
                 homeViewModel.setAddButton()
             }
         })
+
+        homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
+            //if (publication==1){
+                publication?.let {
+                    this.findNavController().navigate(HomeDirections.actionHome2ToPublicationDetail())
+                }
+                //homeViewModel.onPublicationClicked(0)
+            //}
+
+        })
+
         val manager = GridLayoutManager(activity, 2)
         binding.publicationList.layoutManager = manager
         setHasOptionsMenu(true)

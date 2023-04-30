@@ -1,19 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2019, The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,12 +8,17 @@
         <variable
             name="publication"
             type="g54490.mobg5.sharestudent.model.Publication"/>
+
+        <variable
+            name="clickListener"
+            type="g54490.mobg5.sharestudent.view.PublicationListener"/>
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(publication)}">
 
         <ImageView
             android:id="@+id/publication_image"
@@ -41,7 +31,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/livre2" />
+            tools:srcCompat="@drawable/livre2"
+            app:pubImage="@{publication}"/>
 
         <TextView
             android:id="@+id/publication_title"
@@ -58,7 +49,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/publication_image"
             app:layout_constraintVertical_bias="0.0"
-            tools:text="title" />
+            tools:text="title"
+            app:pubTitle="@{publication}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
