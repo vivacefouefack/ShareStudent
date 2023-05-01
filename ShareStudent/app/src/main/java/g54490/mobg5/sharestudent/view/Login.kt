@@ -11,6 +11,7 @@ import g54490.mobg5.sharestudent.databinding.ActivityLoginBinding
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModel
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModelFactory
 
+//FIXME (QHB) :this class should have an explicit name : LoginActivity
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel

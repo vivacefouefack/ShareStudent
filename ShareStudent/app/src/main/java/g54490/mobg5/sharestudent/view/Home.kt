@@ -14,6 +14,7 @@ import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModel
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModelFactory
 
+//FIXME (QHB) :rename the class to HomeFragment
 class Home : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
@@ -45,6 +46,7 @@ class Home : Fragment() {
         })
 
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
+            //FIXME (QHB) :remove dead code
             //if (publication==1){
                 publication?.let {
                     this.findNavController().navigate(HomeDirections.actionHome2ToPublicationDetail())

@@ -28,6 +28,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--FIXME (QHB) :bad constraints : this widget should only be anchored to the bottom right of the screen
+        to always stick at the same constant distance-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addPublication"
             android:layout_width="wrap_content"

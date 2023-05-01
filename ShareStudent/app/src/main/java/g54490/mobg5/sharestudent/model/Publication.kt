@@ -8,6 +8,7 @@ data class Publication(
     var description: String
 )
 
+//FIXME (QHB) :remove dead code
 /*
 var pubId: Long,
     val author: String,
