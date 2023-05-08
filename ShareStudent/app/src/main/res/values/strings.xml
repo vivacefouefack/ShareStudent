@@ -27,4 +27,6 @@
     <string name="add_publication">add publication</string>
     <string name="textAjoutObjet">Ajouter une image de l\'objet</string>
     <string name="publier">PUBLIER</string>
+    <string name="descriptionText">description</string>
+    <string name="titreText">titre</string>
 </resources>

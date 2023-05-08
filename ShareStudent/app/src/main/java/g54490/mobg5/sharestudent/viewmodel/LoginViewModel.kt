@@ -12,7 +12,7 @@ class LoginViewModel(application: Application):ViewModel() {
     private var auth: FirebaseAuth
 
     private var _email = MutableLiveData<CharSequence>()
-    private val email: LiveData<CharSequence>
+    val email: LiveData<CharSequence>
         get() = _email
 
 

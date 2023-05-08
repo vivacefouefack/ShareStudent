@@ -6,6 +6,11 @@ import androidx.lifecycle.ViewModel
 import g54490.mobg5.sharestudent.model.Publication
 
 class AddViewModel:ViewModel() {
+
+    private var _userlog = MutableLiveData<String>()
+    var userlog: String
+        get() = _userlog.value.toString()
+
     private var _image = MutableLiveData<Int>()
     private val image: LiveData<Int>
         get() = _image
@@ -23,11 +28,20 @@ class AddViewModel:ViewModel() {
     val publishButton: LiveData<Boolean?>
         get() = _publishButton
 
+    private var _takePicture = MutableLiveData<Boolean?>()
+    val takePicture: LiveData<Boolean?>
+        get() = _takePicture
+
     init {
+        userlog=""
         _image.value=1
         _title.value =""
         _description.value =""
         _publishButton.value=null
+    }
+
+    fun setuserlog(author:String){
+        _userlog.value=author
     }
 
     fun titleText(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -46,6 +60,14 @@ class AddViewModel:ViewModel() {
         }else{
             _publishButton.value=false
         }
+    }
+
+    fun setTakePicture(){
+        _takePicture.value=false
+    }
+
+    fun canTakePicture(){
+        _takePicture.value=true
     }
 
 }
