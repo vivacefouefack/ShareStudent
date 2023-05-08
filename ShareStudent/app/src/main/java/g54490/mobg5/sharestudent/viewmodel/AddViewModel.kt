@@ -56,6 +56,9 @@ class AddViewModel:ViewModel() {
         if(_title.value.toString().isNotEmpty() && _description.value.toString().isNotEmpty()){
 
             this._publishButton.value=true
+            //FIXME (QHB) : WARNING, totally wrong. Dont instanciate a ViewModel directly.
+            // If you need to share data between ViewModels, use a custom Repository singleton class.
+            //FIXME (QHB) :Don't use "magic numbers". What is 1 here ?
             HomeViewModel().addPublication(Publication(1,title.value.toString(),description.value.toString() ))
         }else{
             _publishButton.value=false

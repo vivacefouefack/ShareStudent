@@ -31,6 +31,7 @@ class PublicationAdapter(val clickListener:PublicationListener):androidx.recycle
     }
 
     override fun onBindViewHolder(holder: PublicationAdapter.ViewHolder, position: Int) {
+        //FIXME (QHB) :avoid using the !! operator. This bypass the kotlin protection against nullpointer exceptions
         holder.bind(getItem(position)!!,clickListener)
     }
 }
