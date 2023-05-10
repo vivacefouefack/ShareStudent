@@ -2,4 +2,5 @@
 <resources>
     <dimen name="size24">24sp</dimen>
     <dimen name="size34">34sp</dimen>
+    <item name="line_spacing" type="dimen" format="float">1.2</item>
 </resources>

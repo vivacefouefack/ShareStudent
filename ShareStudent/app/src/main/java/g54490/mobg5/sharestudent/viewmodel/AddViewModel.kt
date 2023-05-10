@@ -1,15 +1,17 @@
 package g54490.mobg5.sharestudent.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import g54490.mobg5.sharestudent.model.Publication
+import g54490.mobg5.sharestudent.model.Repository
 
 class AddViewModel:ViewModel() {
 
     private var _userlog = MutableLiveData<String>()
     var userlog: String
-        get() = _userlog.value.toString()
+        get() = Repository.getUsername()
 
     private var _image = MutableLiveData<Int>()
     private val image: LiveData<Int>
@@ -33,11 +35,12 @@ class AddViewModel:ViewModel() {
         get() = _takePicture
 
     init {
-        userlog=""
-        _image.value=1
+        userlog= Repository.getUsername()
+        _image.value =1
         _title.value =""
         _description.value =""
         _publishButton.value=null
+        Log.i("usernamess",Repository.getUsername())
     }
 
     fun setuserlog(author:String){

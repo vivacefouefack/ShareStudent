@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
+import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.AddViewModel
 import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 
@@ -27,24 +28,15 @@ import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 class AddPublication : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private lateinit var binding:FragmentAddPublicationBinding
-    lateinit var imagePath:String
-    val REQUEST_TAKE_IMAGE=100
-    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        // Handle the returned Uri
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding>(inflater, R.layout.fragment_add_publication, container, false)
 
-        //val loginViewModelFactory= LoginViewModelFactory(Application())
-        //val loginViewModel=ViewModelProvider(Login(),loginViewModelFactory)[LoginViewModel::class.java]
-
         val addViewModelFactory= AddViewModelFactory()
         addViewModel= ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
-        //addViewModel.setuserlog(loginViewModel.email.value.toString())
-        //Log.i("username",loginViewModel.email.value.toString())
-        //binding.username.text=loginViewModel.email.value.toString()
         binding.addViewModel=addViewModel
+
+        //binding.username.text=Repository.getUsername()
 
         addViewModel.publishButton.observe(viewLifecycleOwner, Observer {
             if (it==true){
@@ -54,7 +46,6 @@ class AddPublication : Fragment() {
 
         addViewModel.takePicture.observe(viewLifecycleOwner, Observer {
             if (it==true){
-
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA),100)
                 }
@@ -63,7 +54,6 @@ class AddPublication : Fragment() {
                 addViewModel.setTakePicture()
             }
         })
-
         return binding.root
     }
 

@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import g54490.mobg5.sharestudent.model.Repository
 
 class LoginViewModel(application: Application):ViewModel() {
+
     private var auth: FirebaseAuth
 
     private var _email = MutableLiveData<CharSequence>()
@@ -55,6 +57,8 @@ class LoginViewModel(application: Application):ViewModel() {
             auth.signInWithEmailAndPassword(email.value.toString(),password.value.toString()).addOnCompleteListener(
                 OnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    Repository.setUsername(email.value.toString())
+                    Log.i("username",Repository.getUsername().toString())
                     _canConnect.value=true
                 } else {
                     this._canConnect.value=false
