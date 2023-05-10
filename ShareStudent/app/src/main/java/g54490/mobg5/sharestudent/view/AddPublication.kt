@@ -1,18 +1,15 @@
 package g54490.mobg5.sharestudent.view
 
 import android.Manifest
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -20,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
-import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.AddViewModel
 import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 
@@ -35,8 +31,6 @@ class AddPublication : Fragment() {
         val addViewModelFactory= AddViewModelFactory()
         addViewModel= ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.addViewModel=addViewModel
-
-        //binding.username.text=Repository.getUsername()
 
         addViewModel.publishButton.observe(viewLifecycleOwner, Observer {
             if (it==true){

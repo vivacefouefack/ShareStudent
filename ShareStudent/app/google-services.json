@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "409667434172",
-    "firebase_url": "https://sharestudent-ccda5-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "sharestudent-ccda5",
-    "storage_bucket": "sharestudent-ccda5.appspot.com"
+    "project_number": "574421102512",
+    "firebase_url": "https://sharestudent-3c6ee-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "sharestudent-3c6ee",
+    "storage_bucket": "sharestudent-3c6ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:409667434172:android:a0fee574b34ce9965e02b9",
+        "mobilesdk_app_id": "1:574421102512:android:d62dd1e9416d910538f075",
         "android_client_info": {
           "package_name": "g54490.mobg5.sharestudent"
         }
       },
       "oauth_client": [
         {
-          "client_id": "409667434172-d034uc4k8c479afgaqrc0dfa7eae3rc5.apps.googleusercontent.com",
+          "client_id": "574421102512-jdudh686pt1i8s2gel71rpthcokbnl3q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2Dn4KnOtnDYDEx6gHCr-Go6Uxjoz9hwE"
+          "current_key": "AIzaSyDPNFdBbzKle-jtxMgQsQTFDCTK4vmbEGA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "409667434172-d034uc4k8c479afgaqrc0dfa7eae3rc5.apps.googleusercontent.com",
+              "client_id": "574421102512-jdudh686pt1i8s2gel71rpthcokbnl3q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
