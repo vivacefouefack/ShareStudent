@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +17,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
+import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.viewmodel.AddViewModel
 import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
+import java.io.File
 
 
 class AddPublication : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private lateinit var binding:FragmentAddPublicationBinding
+    val db = Firebase.firestore
+    var storage=FirebaseStorage.getInstance().reference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding>(inflater, R.layout.fragment_add_publication, container, false)
@@ -34,7 +43,9 @@ class AddPublication : Fragment() {
 
         addViewModel.publishButton.observe(viewLifecycleOwner, Observer {
             if (it==true){
-                this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
+
+
+                //this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
             }
         })
 
@@ -54,7 +65,7 @@ class AddPublication : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode==100){
             var picture:Bitmap?=data?.getParcelableExtra<Bitmap>("data")
-            binding.imageView3.setImageBitmap(picture)
+            binding.imageView5.setImageBitmap(picture)
         }
     }
 
@@ -68,4 +79,5 @@ class AddPublication : Fragment() {
 
         }
     }
+
 }

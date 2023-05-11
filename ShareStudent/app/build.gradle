@@ -74,4 +74,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
     implementation 'com.google.firebase:firebase-core:9.6.1'
+
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+
 }

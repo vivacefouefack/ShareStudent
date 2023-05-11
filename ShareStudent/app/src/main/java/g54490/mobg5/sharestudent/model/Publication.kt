@@ -5,14 +5,8 @@ import androidx.lifecycle.LiveData
 data class Publication(
     var image: Int,
     var title: String,
-    var description: String
-)
-
-//FIXME (QHB) :remove dead code
-/*
-var pubId: Long,
-    val author: String,
-    var image: Int,
-    var title: String,
-    var description: String
- */
+    var description: String,
+    var author: String
+){
+    constructor(): this(1, "","","")
+}
