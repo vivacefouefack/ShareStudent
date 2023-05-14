@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.model.Repository
 
 class AddViewModel:ViewModel() {

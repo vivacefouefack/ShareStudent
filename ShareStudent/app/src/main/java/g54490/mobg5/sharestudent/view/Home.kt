@@ -38,7 +38,7 @@ class Home : Fragment() {
             }
         })
 
-        homeViewModel.addButton.observe(viewLifecycleOwner, Observer {
+        homeViewModel.addPublication.observe(viewLifecycleOwner, Observer {
             if (it==true){
                 this.findNavController().navigate(HomeDirections.actionHome2ToAddPublication2())
                 homeViewModel.setAddButton()
@@ -46,14 +46,9 @@ class Home : Fragment() {
         })
 
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
-            //FIXME (QHB) :remove dead code
-            //if (publication==1){
                 publication?.let {
                     this.findNavController().navigate(HomeDirections.actionHome2ToPublicationDetail())
                 }
-                //homeViewModel.onPublicationClicked(0)
-            //}
-
         })
 
         val manager = GridLayoutManager(activity, 2)

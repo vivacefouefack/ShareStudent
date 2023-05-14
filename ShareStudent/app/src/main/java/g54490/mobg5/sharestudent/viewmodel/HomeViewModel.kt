@@ -12,16 +12,15 @@ class HomeViewModel:ViewModel() {
     val allPublication: LiveData<List<Publication>>
         get() = _allPublication
 
-    //FIXME (QHB) :this property should be renamed, as it's not a Button class.
-    private var _addButton = MutableLiveData<Boolean?>()
-    val addButton: LiveData<Boolean?>
-        get() = _addButton
+    private var _addPublication = MutableLiveData<Boolean?>()
+    val addPublication: LiveData<Boolean?>
+        get() = _addPublication
 
-    private val _navigateToPublicationDetail = MutableLiveData<Int>()
+    private val _navigateToPublicationDetail = MutableLiveData<String>()
     val navigateToPublicationDetail
         get() = _navigateToPublicationDetail
 
-    fun onPublicationClicked(id: Int) {
+    fun onPublicationClicked(id: String) {
         _navigateToPublicationDetail.value = id
     }
 
@@ -30,33 +29,16 @@ class HomeViewModel:ViewModel() {
     }
 
     init {
-        _allPublication.value=null
-        _addButton.value=null
+        _allPublication.value=Repository.getAllPublications()
+        _addPublication.value=null
         //_navigateToPublicationDetail.value=1
-        getData()
     }
 
     fun setAddButton(){
-        _addButton.value=false
-    }
-
-    //FIXME (QHB) : those 2 methods are ok if it's only temporary code to test your app. Not in the final release.
-    // You should create a custom class Repository to hold all the data used by the app and communicate with database
-    // and api.
-    fun getData(){
-        _allPublication.value= listOf(Publication(4,"Clé usb de 32Go","entreprise d'import export",Repository.getUsername()),
-                                      Publication(7," Framework spring","entreprise d'import export1",Repository.getUsername()),
-                                      Publication(5," Framework angular","entreprise d'import export2",Repository.getUsername()),
-                                      Publication(6,"Clé usb de 64Go","entreprise d'import export3",Repository.getUsername()),
-            Publication(7,"africain2","entreprise d'import export2",Repository.getUsername()),
-            Publication(4,"africain3","entreprise d'import export3",Repository.getUsername()),
-            Publication(6,"africain4","entreprise d'import export",Repository.getUsername()),
-            Publication(5,"africain5","entreprise d'import export1",Repository.getUsername()),
-            Publication(5,"africain6","entreprise d'import export2",Repository.getUsername()),
-            Publication(7,"africain7","entreprise d'import export3",Repository.getUsername()))
+        _addPublication.value=false
     }
 
     fun goToAddPublicationUi(){
-        _addButton.value=true
+        _addPublication.value=true
     }
 }

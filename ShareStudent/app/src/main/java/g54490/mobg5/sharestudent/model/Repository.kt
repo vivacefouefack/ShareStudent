@@ -5,13 +5,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 object Repository{
     private  var username=""
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
     private var storage= FirebaseStorage.getInstance().reference
-    private var publicationList:List<Publication>?=null
+    private var publicationLists:MutableList<Publication> = mutableListOf()
 
     fun getUsername():String{
         return username
@@ -25,8 +26,16 @@ object Repository{
         return auth
     }
 
-    fun getAllPublication(): List<Publication>? {
-        return publicationList
+    fun getAllPublications(): MutableList<Publication> {
+        return publicationLists
+    }
+
+    fun getStorage(): StorageReference {
+        return storage
+    }
+
+    init {
+        readData()
     }
 
     fun createPublication(pub: Publication){
@@ -48,17 +57,20 @@ object Repository{
     fun readData(){
         db.collection("publication")
             .get().addOnSuccessListener { result ->
-                publicationList=result.toObjects(Publication::class.java)
                 for (document in result) {
-                    Log.i("data", "${document.id} => ${document.data}")
-                    Log.i("database","un exemple *******************************")
+                    publicationLists.add(Publication(
+                        document.data["image"] as String,
+                        document.data["title"] as String,
+                        document.data["description"] as String,
+                        document.data["author"] as String
+                    ))
                 }
             }
             .addOnFailureListener { exception ->
-                //Log.w("data", "Error getting documents.", exception)
-                Log.i("database","un exemple #####################################")
+                Log.w("error", "Error getting documents.", exception)
             }
     }
+
 }
 //get and show image
 /*val image="usb"

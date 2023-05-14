@@ -22,17 +22,15 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
-import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.viewmodel.AddViewModel
 import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
-import java.io.File
+
 
 
 class AddPublication : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private lateinit var binding:FragmentAddPublicationBinding
-    val db = Firebase.firestore
-    var storage=FirebaseStorage.getInstance().reference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding>(inflater, R.layout.fragment_add_publication, container, false)
