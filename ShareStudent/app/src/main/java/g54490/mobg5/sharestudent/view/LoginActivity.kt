@@ -13,8 +13,7 @@ import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModel
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModelFactory
 
-//FIXME (QHB) :this class should have an explicit name : LoginActivity
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var add: AddViewModel
@@ -46,7 +45,7 @@ class Login : AppCompatActivity() {
 
         loginViewModel.canGoToRegisterUi.observe(this, Observer {
             if (it == true) {
-                val intent= Intent(this,Register::class.java)
+                val intent= Intent(this,RegisterActivity::class.java)
                 startActivity(intent)
             }
         })

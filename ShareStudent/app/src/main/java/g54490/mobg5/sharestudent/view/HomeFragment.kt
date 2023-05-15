@@ -14,8 +14,7 @@ import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModel
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModelFactory
 
-//FIXME (QHB) :rename the class to HomeFragment
-class Home : Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -40,14 +39,14 @@ class Home : Fragment() {
 
         homeViewModel.addPublication.observe(viewLifecycleOwner, Observer {
             if (it==true){
-                this.findNavController().navigate(HomeDirections.actionHome2ToAddPublication2())
+                this.findNavController().navigate(HomeFragmentDirections.actionHome2ToAddPublication2())
                 homeViewModel.setAddButton()
             }
         })
 
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
                 publication?.let {
-                    this.findNavController().navigate(HomeDirections.actionHome2ToPublicationDetail())
+                    this.findNavController().navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
                 }
         })
 

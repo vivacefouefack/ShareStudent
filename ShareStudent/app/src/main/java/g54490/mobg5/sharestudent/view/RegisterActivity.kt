@@ -12,7 +12,7 @@ import g54490.mobg5.sharestudent.databinding.ActivityRegisterBinding
 import g54490.mobg5.sharestudent.viewmodel.RegisterViewModel
 import g54490.mobg5.sharestudent.viewmodel.RegisterViewModelFactory
 
-class Register : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class Register : AppCompatActivity() {
         binding.registerViewModel=registerViewModel
         registerViewModel.createUser.observe(this, Observer {
             if (it==true){
-                Toast.makeText(this@Register, "new user", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@RegisterActivity, "new user", Toast.LENGTH_LONG).show()
                 binding.emailInputEt.text=null
                 binding.passwordInputEt.text=null
                 binding.confirmPasswordInputEt.text=null
@@ -42,7 +42,7 @@ class Register : AppCompatActivity() {
 
         registerViewModel.backToLoginUi.observe(this, Observer {
             if (it==true){
-                val intent= Intent(this,Login::class.java)
+                val intent= Intent(this,LoginActivity::class.java)
                 startActivity(intent)
             }
         })

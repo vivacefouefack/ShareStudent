@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/font2"
-        tools:context="g54490.mobg5.sharestudent.view.Register">
+        tools:context="g54490.mobg5.sharestudent.view.RegisterActivity">
 
 
         <TextView

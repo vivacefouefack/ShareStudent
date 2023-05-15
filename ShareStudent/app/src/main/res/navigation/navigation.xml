@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="g54490.mobg5.sharestudent.view.Home"
+        android:name="g54490.mobg5.sharestudent.view.HomeFragment"
         android:label="share student"
         tools:layout="@layout/fragment_home" >
         <action
