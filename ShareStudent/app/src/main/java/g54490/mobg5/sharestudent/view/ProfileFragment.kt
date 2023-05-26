@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentProfileBinding
 import g54490.mobg5.sharestudent.viewmodel.ProfileViewModel
@@ -22,6 +24,21 @@ class ProfileFragment : Fragment() {
         val profileViewModelFactory= ProfileViewModelFactory()
         profileViewModel= ViewModelProvider(this,profileViewModelFactory)[ProfileViewModel::class.java]
         binding.profileViewModel=profileViewModel
+
+        val adapter = PublicationAdapter(PublicationListener { publicationId ->
+            profileViewModel.onPublicationClicked(publicationId)
+        })
+
+        binding.mesPub.adapter=adapter
+
+        profileViewModel.myPublication.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+
+        val manager = GridLayoutManager(activity, 2)
+        binding.mesPub.layoutManager = manager
 
         return binding.root
     }
