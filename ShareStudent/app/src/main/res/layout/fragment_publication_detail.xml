@@ -12,6 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/font2"
         tools:context=".DetailFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,12 +35,12 @@
                 android:id="@+id/publication_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:textColor="#de000000"
                 android:textSize="39sp"
-                app:pubTitle="@{viewModel.publication}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
+                app:pubTitle="@{viewModel.publication}"
                 tools:text="exemple de titre" />
 
             <TextView
@@ -56,15 +57,39 @@
 
             <Button
                 android:id="@+id/closeRetail"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="88dp"
-                android:text="fermer"
+                android:layout_marginTop="24dp"
                 android:onClick="@{() -> viewModel.navigateToHome()}"
+                android:text="retour"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/write" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="183dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/example_gmail_com"
+                app:pubAuthor="@{viewModel.publication}"
+                android:textColor="#de000000"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/publication_description" />
+
+            <Button
+                android:id="@+id/write"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="ecrire à l'auteur"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/publication_description" />
+                app:layout_constraintTop_toBottomOf="@+id/author" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

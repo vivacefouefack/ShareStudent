@@ -36,3 +36,10 @@ fun TextView.setPubDescription(item: Publication?) {
         text = item.description
     }
 }
+
+@BindingAdapter("pubAuthor")
+fun TextView.setPubAuthor(item: Publication?) {
+    item?.let {
+        text = item.author
+    }
+}
