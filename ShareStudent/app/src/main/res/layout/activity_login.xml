@@ -9,107 +9,114 @@
             type="g54490.mobg5.sharestudent.viewmodel.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loginPage"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/font2"
-        tools:context="g54490.mobg5.sharestudent.view.LoginActivity">
+        android:contentDescription="@string/welcomeText">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loginPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/font2"
+            tools:context="g54490.mobg5.sharestudent.view.LoginActivity">
 
 
-        <TextView
-            android:id="@+id/textLogin1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size24"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="@dimen/size24"
-            android:text="@string/connexionText"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="34sp"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textLogin1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size24"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="@dimen/size24"
+                android:text="@string/connexionText"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="34sp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/inputEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size24"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="@dimen/size24"
-            android:autofillHints=""
-            android:drawableStart="@drawable/baseline_email_24"
-            android:ems="10"
-            android:hint="@string/example_gmail_com"
-            android:onTextChanged="@{loginViewModel::emailEnter}"
-            android:inputType="textEmailAddress"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/white"
-            android:textColorLink="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLogin1"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size24"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="@dimen/size24"
+                android:autofillHints=""
+                android:drawableStart="@drawable/baseline_email_24"
+                android:ems="10"
+                android:hint="@string/example_gmail_com"
+                android:onTextChanged="@{loginViewModel::emailEnter}"
+                android:inputType="textEmailAddress"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textLogin1"
+                tools:ignore="TextContrastCheck" />
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size24"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="@dimen/size24"
-            android:background="@color/purple_700"
-            android:text="@string/connexionText"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:onClick="@{() -> loginViewModel.checkData()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputPassword"
-            tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size24"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/size24"
+                android:background="@color/purple_700"
+                android:text="@string/connexionText"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:onClick="@{() -> loginViewModel.checkData()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputPassword"
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
 
-        <EditText
-            android:id="@+id/inputPassword"
-            android:layout_width="0dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password"
-            android:onTextChanged="@{loginViewModel::passwordEnter}"
-            android:inputType="textPassword"
-            android:drawableStart="@drawable/baseline_lock_24"
-            android:minHeight="48dp"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputEmail"
-            tools:ignore="SpeakableTextPresentCheck" />
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="0dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password"
+                android:onTextChanged="@{loginViewModel::passwordEnter}"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:minHeight="48dp"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/registerLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/register"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:onClick="@{() -> loginViewModel.goToRegisterUi()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+            <TextView
+                android:id="@+id/registerLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="350dp"
+                android:onClick="@{() -> loginViewModel.goToRegisterUi()}"
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
