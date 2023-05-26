@@ -45,8 +45,8 @@
 
             <TextView
                 android:id="@+id/userName"
-                android:layout_width="261dp"
-                android:layout_height="46dp"
+                android:layout_width="255dp"
+                android:layout_height="30dp"
                 android:text="@{profileViewModel.login}"
                 android:textAlignment="center"
                 android:textSize="24sp"
@@ -55,6 +55,36 @@
                 app:layout_constraintHorizontal_bias="0.533"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mesPub"
+                android:layout_width="371dp"
+                android:layout_height="312dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mesPublicationText"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/mesPublicationText"
+                android:layout_width="205dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="100dp"
+                android:text="Mes Publications : "
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+            <TextView
+                android:id="@+id/nb"
+                android:layout_width="31dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="72dp"
+                android:text="0"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/mesPub"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
