@@ -41,8 +41,6 @@ class AddPublication : Fragment() {
 
         addViewModel.publishButton.observe(viewLifecycleOwner, Observer {
             if (it==true){
-
-
                 //this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
             }
         })
