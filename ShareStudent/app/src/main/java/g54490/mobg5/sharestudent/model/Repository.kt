@@ -19,6 +19,8 @@ object Repository{
     var isWifiConn: Boolean = false
     var isMobileConn: Boolean = false
 
+    var pub=Publication("","","","","")
+
     fun getUsername():String{
         return username
     }
@@ -41,7 +43,6 @@ object Repository{
 
     init {
         readData()
-        //publication.value=Publication("","","",""",""","")
     }
 
     fun createPublication(pub: Publication){
@@ -78,14 +79,12 @@ object Repository{
             }
     }
 
-    fun getPublicationWithId(id:String): Publication {
-        var pub=Publication("","","","","")
+    fun getPublicationWithId(id:String){
         for (publication in publicationLists) {
             if (publication.id==id){
                 pub= publication
             }
         }
-        return pub
     }
 
     fun isConnect(connMgr: ConnectivityManager):Boolean{
@@ -101,18 +100,7 @@ object Repository{
         }
         return isWifiConn || isMobileConn
     }
-
 }
-//get and show image
-/*val image="usb"
-val storage=FirebaseStorage.getInstance().reference.child("images/usb.jpg")
 
-val localFile= File.createTempFile("tempImage","jpg")
-storage.getFile(localFile).addOnSuccessListener {
-    val bitmap=BitmapFactory.decodeFile(localFile.absolutePath)
-    binding.imageView5.setImageBitmap(bitmap)
-}.addOnFailureListener{
-    Log.i("imageOnFire","error to get image from firebase")
-}*/
 
 

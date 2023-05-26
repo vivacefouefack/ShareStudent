@@ -1,6 +1,7 @@
 package g54490.mobg5.sharestudent.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import g54490.mobg5.sharestudent.R
+import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModel
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModelFactory
 
@@ -45,7 +47,10 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
+
                 publication?.let {
+                    Log.i("detail",it)
+                    Repository.getPublicationWithId(it)
                     this.findNavController().navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
                 }
         })

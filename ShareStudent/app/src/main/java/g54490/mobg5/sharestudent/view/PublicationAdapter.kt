@@ -34,8 +34,8 @@ class PublicationAdapter(val clickListener:PublicationListener):androidx.recycle
         holder.bind(getItem(position)!!,clickListener)
     }
 }
-class PublicationListener(val clickListener: (publicationId: String) -> Unit) {
-    fun    onClick(pub: Publication) = clickListener(pub.id)
+class PublicationListener(val clickListener: (id: String) -> Unit) {
+    fun onClick(pub: Publication) = clickListener(pub.id)
 }
 
 class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {

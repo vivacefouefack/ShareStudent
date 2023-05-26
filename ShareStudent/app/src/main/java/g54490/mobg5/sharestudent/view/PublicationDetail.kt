@@ -17,7 +17,7 @@ import g54490.mobg5.sharestudent.viewmodel.PublicationViewModelFactory
 class PublicationDetail : Fragment() {
     private lateinit var binding:FragmentPublicationDetailBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
 
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentPublicationDetailBinding>(inflater, R.layout.fragment_publication_detail, container, false)
 

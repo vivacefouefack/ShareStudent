@@ -7,14 +7,11 @@ import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.model.Repository
 
 class PublicationViewModel:ViewModel() {
-    //public var publication: LiveData<Publication> = TODO()
-     var publication1=Repository.getAllPublications()[1]
-     public var publication:Publication
-         get()=publication1
+     public var publication:Publication=Publication("","","","","")
+         get()=Repository.pub
 
     init {
-        publication=Repository.getAllPublications()[1]
-        publication1=Repository.getAllPublications()[1]
+
     }
 
     private val _navigateToHome = MutableLiveData<Boolean?>()
