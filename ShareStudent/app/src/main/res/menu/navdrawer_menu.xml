@@ -12,7 +12,7 @@
         android:title="@string/messageries" />
 
     <item
-        android:id="@+id/profil"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/account"
         android:title="@string/profil" />
 

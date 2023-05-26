@@ -43,5 +43,10 @@
             android:id="@+id/action_publicationDetail_to_home2"
             app:destination="@id/home2" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="g54490.mobg5.sharestudent.view.ProfileFragment"
+        android:label="profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
