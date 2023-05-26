@@ -30,7 +30,7 @@ class ProfileViewModel: ViewModel(){
     }
 
     init {
-        _myPublication.value=Repository.getAllPublications()//Repository.getMyPublications()
+        _myPublication.value=Repository.getMyPublications()
     }
 
 }

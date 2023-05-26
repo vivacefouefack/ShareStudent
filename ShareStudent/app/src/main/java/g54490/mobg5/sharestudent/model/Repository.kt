@@ -15,6 +15,7 @@ object Repository{
     private val db = Firebase.firestore
     private var storage= FirebaseStorage.getInstance().reference
     private var publicationLists:MutableList<Publication> = mutableListOf()
+    private var myPublicationList:MutableList<Publication> = mutableListOf()
 
     var isWifiConn: Boolean = false
     var isMobileConn: Boolean = false
@@ -27,6 +28,7 @@ object Repository{
 
     fun setUsername(name:String){
         this.username=name
+        getmyPublication()
     }
 
     fun getAuth(): FirebaseAuth {
@@ -43,6 +45,18 @@ object Repository{
 
     init {
         readData()
+    }
+
+    fun getMyPublications(): MutableList<Publication> {
+        return myPublicationList
+    }
+
+    fun getmyPublication(){
+        for (publication in publicationLists) {
+            if (publication.author== username){
+                myPublicationList.add(publication)
+            }
+        }
     }
 
     fun createPublication(pub: Publication){
