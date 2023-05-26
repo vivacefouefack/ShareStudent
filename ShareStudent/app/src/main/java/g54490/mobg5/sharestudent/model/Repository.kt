@@ -1,6 +1,8 @@
 package g54490.mobg5.sharestudent.model
 
+import android.net.ConnectivityManager
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -13,6 +15,9 @@ object Repository{
     private val db = Firebase.firestore
     private var storage= FirebaseStorage.getInstance().reference
     private var publicationLists:MutableList<Publication> = mutableListOf()
+
+    var isWifiConn: Boolean = false
+    var isMobileConn: Boolean = false
 
     fun getUsername():String{
         return username
@@ -36,6 +41,7 @@ object Repository{
 
     init {
         readData()
+        //publication.value=Publication("","","",""",""","")
     }
 
     fun createPublication(pub: Publication){
@@ -59,6 +65,7 @@ object Repository{
             .get().addOnSuccessListener { result ->
                 for (document in result) {
                     publicationLists.add(Publication(
+                        document.id,
                         document.data["image"] as String,
                         document.data["title"] as String,
                         document.data["description"] as String,
@@ -69,6 +76,30 @@ object Repository{
             .addOnFailureListener { exception ->
                 Log.w("error", "Error getting documents.", exception)
             }
+    }
+
+    fun getPublicationWithId(id:String): Publication {
+        var pub=Publication("","","","","")
+        for (publication in publicationLists) {
+            if (publication.id==id){
+                pub= publication
+            }
+        }
+        return pub
+    }
+
+    fun isConnect(connMgr: ConnectivityManager):Boolean{
+        connMgr.allNetworks.forEach { network ->
+            connMgr.getNetworkInfo(network)?.apply {
+                if (type == ConnectivityManager.TYPE_WIFI) {
+                    isWifiConn = isWifiConn or isConnected
+                }
+                if (type == ConnectivityManager.TYPE_MOBILE) {
+                    isMobileConn = isMobileConn or isConnected
+                }
+            }
+        }
+        return isWifiConn || isMobileConn
     }
 
 }

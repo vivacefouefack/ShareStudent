@@ -29,3 +29,10 @@ fun TextView.setPubTitle(item: Publication?) {
         text = item.title
     }
 }
+
+@BindingAdapter("pubDescription")
+fun TextView.setPubDescription(item: Publication?) {
+    item?.let {
+        text = item.description
+    }
+}

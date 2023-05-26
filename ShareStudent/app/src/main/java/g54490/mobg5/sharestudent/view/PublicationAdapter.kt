@@ -13,7 +13,6 @@ class PublicationAdapter(val clickListener:PublicationListener):androidx.recycle
     class ViewHolder private constructor(val binding: ListeItemPublicationBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: Publication, clickListener: PublicationListener) {
             binding.publication = item
-
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -36,12 +35,12 @@ class PublicationAdapter(val clickListener:PublicationListener):androidx.recycle
     }
 }
 class PublicationListener(val clickListener: (publicationId: String) -> Unit) {
-    fun    onClick(pub: Publication) = clickListener(pub.image)
+    fun    onClick(pub: Publication) = clickListener(pub.id)
 }
 
 class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {
     override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {
-        return oldItem.image== newItem.image
+        return oldItem.id== newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Publication, newItem: Publication): Boolean {

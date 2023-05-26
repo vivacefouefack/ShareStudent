@@ -28,10 +28,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                tools:src="@drawable/add_photos" />
 
             <TextView
-                android:id="@+id/property_type_text"
+                android:id="@+id/publication_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -43,16 +43,28 @@
                 tools:text="exemple de titre" />
 
             <TextView
-                android:id="@+id/price_value_text"
+                android:id="@+id/publication_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="#de000000"
                 android:textSize="20sp"
-                app:pubTitle="@{viewModel.publication}"
+                app:pubDescription="@{viewModel.publication}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/property_type_text"
+                app:layout_constraintTop_toBottomOf="@+id/publication_Title"
                 tools:text="description" />
+
+            <Button
+                android:id="@+id/closeRetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="88dp"
+                android:text="fermer"
+                android:onClick="@{() -> viewModel.navigateToHome()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/publication_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
