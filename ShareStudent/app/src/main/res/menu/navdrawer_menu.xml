@@ -17,11 +17,6 @@
         android:title="@string/profil" />
 
     <item
-        android:id="@+id/publications"
-        android:icon="@drawable/publication"
-        android:title="@string/publications" />
-
-    <item
         android:id="@+id/logout"
         android:icon="@drawable/logout"
         android:title="@string/d_connexion" />

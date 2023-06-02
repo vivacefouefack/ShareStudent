@@ -11,7 +11,9 @@ class ProfileViewModel: ViewModel(){
     var login: String=""
         get() = Repository.getUsername()
 
-    var nbPublication:Int=10//Repository.getMyPublications().size
+    private var _nbPublication = MutableLiveData<String>()
+    var nbPublication: String=""
+        get() =Repository.getMyPublications().size.toString()
 
     private var _myPublication = MutableLiveData<List<Publication>>()
     val myPublication: LiveData<List<Publication>>

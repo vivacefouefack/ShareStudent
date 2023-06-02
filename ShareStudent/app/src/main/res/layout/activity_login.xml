@@ -12,12 +12,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/font2"
         android:contentDescription="@string/welcomeText">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginPage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/font2"
             tools:context="g54490.mobg5.sharestudent.view.LoginActivity">
 
 
@@ -30,8 +31,8 @@
                 android:layout_marginRight="@dimen/size24"
                 android:text="@string/connexionText"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="34sp"
+                android:textStyle="bold"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -48,8 +49,8 @@
                 android:drawableStart="@drawable/baseline_email_24"
                 android:ems="10"
                 android:hint="@string/example_gmail_com"
-                android:onTextChanged="@{loginViewModel::emailEnter}"
                 android:inputType="textEmailAddress"
+                android:onTextChanged="@{loginViewModel::emailEnter}"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/white"
                 android:textColorLink="@color/white"
@@ -68,10 +69,10 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="@dimen/size24"
                 android:background="@color/purple_700"
+                android:onClick="@{() -> loginViewModel.checkData()}"
                 android:text="@string/connexionText"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:onClick="@{() -> loginViewModel.checkData()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,12 +87,12 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:autofillHints=""
+                android:drawableStart="@drawable/baseline_lock_24"
                 android:ems="10"
                 android:hint="@string/password"
-                android:onTextChanged="@{loginViewModel::passwordEnter}"
                 android:inputType="textPassword"
-                android:drawableStart="@drawable/baseline_lock_24"
                 android:minHeight="48dp"
+                android:onTextChanged="@{loginViewModel::passwordEnter}"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/white"
                 android:textSize="24sp"
