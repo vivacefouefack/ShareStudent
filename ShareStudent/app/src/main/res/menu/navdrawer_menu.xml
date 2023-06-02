@@ -17,7 +17,7 @@
         android:title="@string/profil" />
 
     <item
-        android:id="@+id/logout"
+        android:id="@+id/logoutFragment"
         android:icon="@drawable/logout"
         android:title="@string/d_connexion" />
 

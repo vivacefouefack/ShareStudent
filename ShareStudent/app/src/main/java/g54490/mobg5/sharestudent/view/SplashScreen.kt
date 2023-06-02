@@ -9,7 +9,6 @@ import g54490.mobg5.sharestudent.R
 class SplashScreen : AppCompatActivity() {
     private lateinit var handler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         handler= Handler()
         handler.postDelayed({

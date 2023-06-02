@@ -17,7 +17,7 @@
         android:contentDescription="@string/welcomeText">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ProfileFragment"
+            android:id="@+id/logoutFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -57,40 +57,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profil_image" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mesPub"
-                android:layout_width="388dp"
-                android:layout_height="393dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="60dp"
+                android:text="Logout"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mesPublicationText"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
-                android:id="@+id/mesPublicationText"
-                android:layout_width="0dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="100dp"
-                android:text="Mes Publications : "
-                android:textSize="24sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userName" />
 
-            <TextView
-                android:id="@+id/nb"
-                android:layout_width="31dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="72dp"
-                android:layout_marginBottom="24dp"
-                android:text="@{profileViewModel.nbPublication}"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/mesPub"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

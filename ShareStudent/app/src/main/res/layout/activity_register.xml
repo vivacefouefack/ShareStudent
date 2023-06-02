@@ -12,13 +12,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/font2"
         android:contentDescription="@string/welcomeText">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/registPage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/font2"
             tools:context="g54490.mobg5.sharestudent.view.RegisterActivity">
 
             <TextView
