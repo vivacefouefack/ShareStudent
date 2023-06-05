@@ -25,9 +25,9 @@ class AddViewModel:ViewModel() {
     private val description: LiveData<CharSequence>
         get() = _description
 
-    private var _publishButton = MutableLiveData<Boolean?>()
+    private var _publishPress = MutableLiveData<Boolean?>()
     val publishButton: LiveData<Boolean?>
-        get() = _publishButton
+        get() = _publishPress
 
     private var _takePicture = MutableLiveData<Boolean?>()
     val takePicture: LiveData<Boolean?>
@@ -38,7 +38,7 @@ class AddViewModel:ViewModel() {
         _image.value =1
         _title.value =""
         _description.value =""
-        _publishButton.value=null
+        _publishPress.value=null
     }
 
     fun titleText(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -60,9 +60,9 @@ class AddViewModel:ViewModel() {
             }catch (e:Exception){
 
             }
-            this._publishButton.value=true
+            this._publishPress.value=true
         }else{
-            _publishButton.value=false
+            _publishPress.value=false
         }
     }
 
