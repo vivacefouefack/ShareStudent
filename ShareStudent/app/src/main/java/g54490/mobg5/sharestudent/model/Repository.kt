@@ -1,7 +1,10 @@
 package g54490.mobg5.sharestudent.model
 
+import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -19,6 +22,7 @@ object Repository{
 
     var isWifiConn: Boolean = false
     var isMobileConn: Boolean = false
+    var canRead: Boolean = true
 
     var pub=Publication("","","","","")
 
@@ -44,7 +48,7 @@ object Repository{
     }
 
     init {
-        readData()
+        //readData()
     }
 
     fun getMyPublications(): MutableList<Publication> {
@@ -76,21 +80,24 @@ object Repository{
     }
 
     fun readData(){
-        db.collection("publication")
-            .get().addOnSuccessListener { result ->
-                for (document in result) {
-                    publicationLists.add(Publication(
-                        document.id,
-                        document.data["image"] as String,
-                        document.data["title"] as String,
-                        document.data["description"] as String,
-                        document.data["author"] as String
-                    ))
+        if (canRead){
+            db.collection("publication")
+                .get().addOnSuccessListener { result ->
+                    for (document in result) {
+                        publicationLists.add(Publication(
+                            document.id,
+                            document.data["image"] as String,
+                            document.data["title"] as String,
+                            document.data["description"] as String,
+                            document.data["author"] as String
+                        ))
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("error", "Error getting documents.", exception)
-            }
+                .addOnFailureListener { exception ->
+                    Log.w("error", "Error getting documents.", exception)
+                }
+            canRead=false
+        }
     }
 
     fun getPublicationWithId(id:String){
@@ -113,6 +120,12 @@ object Repository{
             }
         }
         return isWifiConn || isMobileConn
+    }
+
+    fun isOnline(connMgr: ConnectivityManager): Boolean {
+        //val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
+        return networkInfo?.isConnected == true
     }
 }
 
