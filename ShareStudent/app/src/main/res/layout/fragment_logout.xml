@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="g54490.mobg5.sharestudent.view.ProfileFragment">
 
-    <data>
-        <variable
-            name="profileViewModel"
-            type="g54490.mobg5.sharestudent.viewmodel.ProfileViewModel" />
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,8 +42,9 @@
                 android:id="@+id/userName"
                 android:layout_width="255dp"
                 android:layout_height="30dp"
-                android:text="@{profileViewModel.login}"
+                android:text="@string/example_gmail_com"
                 android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="60dp"
                 android:text="Logout"
                 android:textColor="@color/white"

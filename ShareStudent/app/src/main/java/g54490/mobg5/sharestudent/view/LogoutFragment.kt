@@ -2,6 +2,7 @@ package g54490.mobg5.sharestudent.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ class LogoutFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentLogoutBinding>(inflater, R.layout.fragment_logout, container, false)
         binding.userName.text=Repository.getUsername()
+        Log.i("logout",Repository.getUsername())
         binding.logoutButton.setOnClickListener {
             Repository.getAuth().signOut()
             requireActivity().run {
