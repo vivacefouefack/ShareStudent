@@ -55,17 +55,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/publication_Title"
                 tools:text="description" />
 
-            <Button
-                android:id="@+id/closeRetail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:onClick="@{() -> viewModel.navigateToHome()}"
-                android:text="retour"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/write" />
-
             <TextView
                 android:id="@+id/author"
                 android:layout_width="183dp"
@@ -85,9 +74,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
-                android:text="ecrire à l'auteur"
+                android:onClick="@{() -> viewModel.sendEmail()}"
+                android:text="@string/writeToAuthor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/author" />
 

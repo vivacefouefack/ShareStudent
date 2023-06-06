@@ -47,12 +47,14 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner, Observer { publication->
-
+            if (publication.isNotEmpty()){
                 publication?.let {
                     Log.i("detail",it)
                     Repository.getPublicationWithId(it)
                     this.findNavController().navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
+                    homeViewModel.onPublicationClicked("")
                 }
+            }
         })
 
         val manager = GridLayoutManager(activity, 2)

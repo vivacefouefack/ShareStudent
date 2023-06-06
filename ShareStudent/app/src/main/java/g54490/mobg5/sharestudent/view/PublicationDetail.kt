@@ -1,10 +1,13 @@
 package g54490.mobg5.sharestudent.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,13 +30,29 @@ class PublicationDetail : Fragment() {
         binding.viewModel=publicationDetailViewModel
         binding.lifecycleOwner = this
 
-        publicationDetailViewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
+        publicationDetailViewModel.writeToAuthor.observe(viewLifecycleOwner, Observer {
             if (it==true){
-                findNavController().navigate(PublicationDetailDirections.actionPublicationDetailToHome2())
-                publicationDetailViewModel.doneNavigating()
+                sendEmail(publicationDetailViewModel.publication.author,publicationDetailViewModel.publication.title,"je suis interessé par  la publication,est ce quelle est toujours disponible?")
             }
         })
 
         return binding.root
+    }
+
+
+    private fun sendEmail(recipient: String, subject: String, message: String) {
+        val mIntent = Intent(Intent.ACTION_SEND)
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        mIntent.putExtra(Intent.EXTRA_TEXT, message)
+        try {
+            startActivity(Intent.createChooser(mIntent, "Choose Email"))
+        }
+        catch (e: Exception){
+            Toast.makeText(this.activity, "send", Toast.LENGTH_LONG).show()
+        }
+
     }
 }

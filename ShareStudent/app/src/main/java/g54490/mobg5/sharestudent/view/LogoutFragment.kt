@@ -18,7 +18,6 @@ class LogoutFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentLogoutBinding>(inflater, R.layout.fragment_logout, container, false)
         binding.userName.text=Repository.getUsername()
-        Log.i("logout",Repository.getUsername())
         binding.logoutButton.setOnClickListener {
             Repository.getAuth().signOut()
             requireActivity().run {

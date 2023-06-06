@@ -16,6 +16,10 @@ class HomeViewModel:ViewModel() {
     val addPublication: LiveData<Boolean?>
         get() = _addPublication
 
+    private var _canNavigate = MutableLiveData<Boolean?>()
+    val canNavigate: LiveData<Boolean?>
+        get() = _canNavigate
+
     private val _navigateToPublicationDetail = MutableLiveData<String>()
     val navigateToPublicationDetail
         get() = _navigateToPublicationDetail
@@ -24,14 +28,10 @@ class HomeViewModel:ViewModel() {
         _navigateToPublicationDetail.value = id
     }
 
-    fun onPublicationDetailNavigated() {
-        _navigateToPublicationDetail.value = null
-    }
-
     init {
         _allPublication.value=Repository.getAllPublications()
         _addPublication.value=null
-        //_navigateToPublicationDetail.value=1
+        _canNavigate.value=null
     }
 
     fun setAddButton(){
