@@ -12,7 +12,7 @@ import java.io.File
 @BindingAdapter("pubImage")
 fun ImageView.publicationImage( item: Publication?) {
     item?.let {
-        val storage=Repository.getStorage().child(item.image)
+        val storage=Repository.getStorageReference().child(item.image)
         val localFile= File.createTempFile("tempImage","jpg")
         storage.getFile(localFile).addOnSuccessListener {
             val bitmap= BitmapFactory.decodeFile(localFile.absolutePath)
