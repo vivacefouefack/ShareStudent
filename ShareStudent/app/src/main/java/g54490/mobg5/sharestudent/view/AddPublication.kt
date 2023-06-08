@@ -19,7 +19,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
@@ -39,57 +38,66 @@ class AddPublication : Fragment() {
     private val galleryCode=200
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding>(inflater, R.layout.fragment_add_publication, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_add_publication, container, false)
 
         val addViewModelFactory= AddViewModelFactory()
         addViewModel= ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.addViewModel=addViewModel
 
-        addViewModel.publishPress.observe(viewLifecycleOwner, Observer {
-            if (it==true){
-                if (imageUri != null) {
-                    val progressDialog = ProgressDialog(requireContext())
-                    progressDialog.setTitle("Uploading...")
-                    progressDialog.setMessage("Uploading your image")
-                    progressDialog.show()
-                    Repository.getStorage().getReference("images").child(addViewModel.getImageName())
-                        .putFile(imageUri).addOnSuccessListener {
-                            progressDialog.dismiss()
-                            Toast.makeText(requireContext(), "image Uploaded", Toast.LENGTH_SHORT).show()
-                        }.addOnFailureListener{
-                            progressDialog.dismiss()
-                            Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT).show()
-                        }
-                }
+        addViewModel.publishPress.observe(viewLifecycleOwner) {
+            if (it == true) {
+                val progressDialog = ProgressDialog(requireContext())
+                progressDialog.setTitle("Uploading...")
+                progressDialog.setMessage("Uploading your image")
+                progressDialog.show()
+                Repository.getStorage().getReference("images").child(addViewModel.getImageName())
+                    .putFile(imageUri).addOnSuccessListener {
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "image Uploaded", Toast.LENGTH_SHORT)
+                            .show()
+                    }.addOnFailureListener {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            requireContext(),
+                            "Fail to Upload Image..",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 Repository.readData()
             }
-            if(it==false){
-                binding.titre.error="invalid"
-                binding.description.error="invalid"
+            if (it == false) {
+                binding.titre.error = "invalid"
+                binding.description.error = "invalid"
             }
-        })
-        addViewModel.takePicture.observe(viewLifecycleOwner, Observer {
+        }
 
-        })
-
-        addViewModel.galleryPress.observe(viewLifecycleOwner, Observer {
-            if (it==true){
-                val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        addViewModel.galleryPress.observe(viewLifecycleOwner) {
+            if (it == true) {
+                val gallery =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
                 startActivityForResult(gallery, galleryCode)
             }
-        })
+        }
 
-        addViewModel.cameraPress.observe(viewLifecycleOwner, Observer {
-            if (it==true){
-                if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA),100)
+        addViewModel.cameraPress.observe(viewLifecycleOwner) {
+            if (it == true) {
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        requireActivity(),
+                        arrayOf(Manifest.permission.CAMERA),
+                        100
+                    )
                 }
-                var intent =Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent,code)
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, code)
                 addViewModel.setTakePicture()
             }
-        })
+        }
         return binding.root
     }
 
@@ -100,7 +108,7 @@ class AddPublication : Fragment() {
         }
 
         if (resultCode == RESULT_OK && requestCode==code){
-            var picture:Bitmap?=data?.getParcelableExtra<Bitmap>("data")
+            val picture:Bitmap?=data?.getParcelableExtra("data")
             saveMediaToStorage(picture!!)
             imageUri = captureImageUri
             binding.imageView5.setImageBitmap(picture)
@@ -113,12 +121,12 @@ class AddPublication : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode==code && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        /*if (requestCode==code && grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
-        }
+        }*/
     }
 
-    fun saveMediaToStorage(bitmap: Bitmap) {
+    private fun saveMediaToStorage(bitmap: Bitmap) {
         addViewModel.setImageName(System.currentTimeMillis().toString()+".jpg")
         val filename=addViewModel.getImageName()
         var fos: OutputStream? = null
@@ -133,11 +141,10 @@ class AddPublication : Fragment() {
                  val imageUri: Uri? =
                     resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                     captureImageUri=imageUri!!
-                fos = imageUri?.let { resolver.openOutputStream(it) }
+                fos = imageUri.let { resolver.openOutputStream(it) }
             }
         } else {
-            val imagesDir =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
             val image = File(imagesDir, filename)
             fos = FileOutputStream(image)
         }
