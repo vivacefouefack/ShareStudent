@@ -18,7 +18,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
         },6000)
-
         setContentView(R.layout.activity_splash_screen)
     }
 }

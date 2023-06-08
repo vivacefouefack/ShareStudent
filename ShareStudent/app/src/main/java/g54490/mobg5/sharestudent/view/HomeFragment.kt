@@ -22,7 +22,6 @@ class HomeFragment : Fragment() {
         val binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
         val homeViewModelFactory=HomeViewModelFactory()
         homeViewModel=ViewModelProvider(this,homeViewModelFactory)[HomeViewModel::class.java]
-
         val adapter = PublicationAdapter(PublicationListener { publicationId ->
             homeViewModel.onPublicationClicked(publicationId)
         })
