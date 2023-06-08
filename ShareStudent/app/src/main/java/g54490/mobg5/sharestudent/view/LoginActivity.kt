@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.ActivityLoginBinding
@@ -33,31 +32,30 @@ class LoginActivity : AppCompatActivity() {
         add=ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
 
         binding.loginViewModel=loginViewModel
-
-        loginViewModel.canConnect.observe(this, Observer {
+        loginViewModel.canConnect.observe(this) {
             val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (Repository.isOnline(connMgr)){
+            if (Repository.isOnline(connMgr)) {
                 Repository.readData()
                 if (it == true) {
-                    val intent= Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    binding.inputEmail.text=null
-                    binding.inputPassword.text=null
+                    binding.inputEmail.text = null
+                    binding.inputPassword.text = null
                 }
-                if (it == false){
+                if (it == false) {
                     binding.inputEmail.error = "invalid"
                     binding.inputPassword.error = "invalid"
                 }
-            }else{
+            } else {
                 Toast.makeText(this@LoginActivity, "connexion error", Toast.LENGTH_LONG).show()
             }
-        })
+        }
 
-        loginViewModel.canGoToRegisterUi.observe(this, Observer {
+        loginViewModel.canGoToRegisterUi.observe(this) {
             if (it == true) {
-                val intent= Intent(this,RegisterActivity::class.java)
+                val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
             }
-        })
+        }
     }
 }

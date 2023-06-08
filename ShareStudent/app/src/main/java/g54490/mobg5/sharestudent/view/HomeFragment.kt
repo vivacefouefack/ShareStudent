@@ -55,7 +55,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
         val manager = GridLayoutManager(activity, 2)
         binding.publicationList.layoutManager = manager
         setHasOptionsMenu(true)
