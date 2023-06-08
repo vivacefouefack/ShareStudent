@@ -42,7 +42,7 @@ class AddViewModel:ViewModel() {
     val takePicture: LiveData<Boolean?>
         get() = _takePicture
 
-    private var imageName=""
+    private var imageName=System.currentTimeMillis().toString()+".jpg"
 
     init {
         userlog= Repository.getUsername()
@@ -64,13 +64,13 @@ class AddViewModel:ViewModel() {
 
     fun checkDataAndCreatePublication(){
         if(_title.value.toString().isNotEmpty() && _description.value.toString().isNotEmpty()){
-            imageName=System.currentTimeMillis().toString()
+            //imageName=System.currentTimeMillis().toString()
             Log.i("insert",_title.value.toString())
             Log.i("insert",_description.value.toString())
             Log.i("insert",Repository.getUsername())
             Log.i("insert",imageName)
             try {
-               Repository.createPublication(Publication(System.currentTimeMillis().toString(),"images/"+imageName,_title.value.toString(),_description.value.toString(),userlog))
+               Repository.createPublication(Publication("","images/"+imageName,_title.value.toString(),_description.value.toString(),userlog))
             }catch (e:Exception){
 
             }
@@ -86,6 +86,10 @@ class AddViewModel:ViewModel() {
 
     fun getImageName(): String {
         return imageName
+    }
+
+    fun setImageName(name:String){
+        imageName=name
     }
 
     fun setCameraPress(){

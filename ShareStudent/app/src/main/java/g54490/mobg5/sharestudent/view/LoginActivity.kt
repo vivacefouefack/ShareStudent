@@ -41,8 +41,8 @@ class LoginActivity : AppCompatActivity() {
                 if (it == true) {
                     val intent= Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    //binding.inputEmail.text=null
-                    //binding.inputPassword.text=null
+                    binding.inputEmail.text=null
+                    binding.inputPassword.text=null
                 }
                 if (it == false){
                     binding.inputEmail.error = "invalid"

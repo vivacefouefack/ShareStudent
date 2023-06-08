@@ -3,11 +3,14 @@ package g54490.mobg5.sharestudent.view
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,23 +21,22 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
 import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.AddViewModel
 import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
-import java.text.SimpleDateFormat
-import java.util.*
-
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 class AddPublication : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private lateinit var binding:FragmentAddPublicationBinding
-    private lateinit var imagePath:String
     private lateinit var imageUri: Uri
-    val code=100
-    val galleryCode=200
+    private lateinit var captureImageUri: Uri
+    private val code=100
+    private val galleryCode=200
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,7 +49,6 @@ class AddPublication : Fragment() {
         addViewModel.publishPress.observe(viewLifecycleOwner, Observer {
             if (it==true){
                 if (imageUri != null) {
-                    imageUri.queryParameterNames
                     val progressDialog = ProgressDialog(requireContext())
                     progressDialog.setTitle("Uploading...")
                     progressDialog.setMessage("Uploading your image")
@@ -62,16 +63,12 @@ class AddPublication : Fragment() {
                         }
                 }
                 Repository.readData()
-                //this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
             }
             if(it==false){
                 binding.titre.error="invalid"
                 binding.description.error="invalid"
             }
         })
-
-
-
         addViewModel.takePicture.observe(viewLifecycleOwner, Observer {
 
         })
@@ -102,10 +99,10 @@ class AddPublication : Fragment() {
             binding.imageView5.setImageURI(imageUri)
         }
 
-        if (requestCode==code){
+        if (resultCode == RESULT_OK && requestCode==code){
             var picture:Bitmap?=data?.getParcelableExtra<Bitmap>("data")
-            //Repository.getStorage().getReference("images").child(System.currentTimeMillis().toString())
-            //.putFile(Uri.parse(picture.))
+            saveMediaToStorage(picture!!)
+            imageUri = captureImageUri
             binding.imageView5.setImageBitmap(picture)
         }
     }
@@ -120,5 +117,35 @@ class AddPublication : Fragment() {
 
         }
     }
+
+    fun saveMediaToStorage(bitmap: Bitmap) {
+        addViewModel.setImageName(System.currentTimeMillis().toString()+".jpg")
+        val filename=addViewModel.getImageName()
+        var fos: OutputStream? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            context?.contentResolver?.also { resolver ->
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+
+                 val imageUri: Uri? =
+                    resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                    captureImageUri=imageUri!!
+                fos = imageUri?.let { resolver.openOutputStream(it) }
+            }
+        } else {
+            val imagesDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+        }
+    }
+
 
 }
