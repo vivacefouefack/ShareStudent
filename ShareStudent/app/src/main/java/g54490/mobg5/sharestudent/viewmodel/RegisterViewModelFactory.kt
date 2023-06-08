@@ -8,7 +8,7 @@ class RegisterViewModelFactory(private val application: Application):ViewModelPr
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
-            return RegisterViewModel(application) as T
+            return RegisterViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

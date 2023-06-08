@@ -1,22 +1,22 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import g54490.mobg5.sharestudent.model.Repository
 
-class RegisterViewModel(application: Application):ViewModel() {
+class RegisterViewModel :ViewModel() {
     private var _email = MutableLiveData<CharSequence>()
-    val email: LiveData<CharSequence>
+    private val email: LiveData<CharSequence>
         get() = _email
 
     private var _password = MutableLiveData<CharSequence>()
-    val password: LiveData<CharSequence>
+    private val password: LiveData<CharSequence>
         get() = _password
 
     private var _passwordConfirm = MutableLiveData<CharSequence>()
-    val passwordConfirm: LiveData<CharSequence>
+    private val passwordConfirm: LiveData<CharSequence>
         get() = _passwordConfirm
 
     private val _createUser = MutableLiveData<Boolean?>()
@@ -35,23 +35,26 @@ class RegisterViewModel(application: Application):ViewModel() {
         _backToLoginUi.value=null
     }
 
-    fun isValidEmail():Boolean {
+    private fun isValidEmail():Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email.value).matches()
     }
 
     fun emailInput(s: CharSequence, start: Int, before: Int, count: Int) {
+        Log.i("insert",""+start+before+count)
         _email.value = s.toString()
     }
 
     fun passwordInput(s: CharSequence, start: Int, before: Int, count: Int) {
+        Log.i("insert",""+start+before+count)
         _password.value = s.toString()
     }
 
     fun passwordConfirmInput(s: CharSequence, start: Int, before: Int, count: Int) {
+        Log.i("insert",""+start+before+count)
         _passwordConfirm.value = s.toString()
     }
 
-    fun isValidpassword():Boolean {
+    private fun isValidpassword():Boolean {
         if (password.value.toString().isNotEmpty() && passwordConfirm.value.toString().isNotEmpty()){
             if (password.value==passwordConfirm.value){
                 return true

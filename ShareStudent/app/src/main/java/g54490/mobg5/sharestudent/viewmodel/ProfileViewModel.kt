@@ -7,12 +7,12 @@ import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.model.Repository
 
 class ProfileViewModel: ViewModel(){
-    private var _login = MutableLiveData<String>()
-    var login: String=""
+    //private var _login = MutableLiveData<String>()
+    val login: String
         get() = Repository.getUsername()
 
-    private var _nbPublication = MutableLiveData<String>()
-    var nbPublication: String=""
+    //private var _nbPublication = MutableLiveData<String>()
+    val nbPublication: String
         get() =Repository.getMyPublications().size.toString()
 
     private var _myPublication = MutableLiveData<List<Publication>>()
@@ -25,10 +25,6 @@ class ProfileViewModel: ViewModel(){
 
     fun onPublicationClicked(id: String) {
         _navigateToPublicationDetail.value = id
-    }
-
-    fun onPublicationDetailNavigated() {
-        _navigateToPublicationDetail.value = null
     }
 
     init {
