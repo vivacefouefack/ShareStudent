@@ -95,7 +95,6 @@ class AddPublication : Fragment() {
                 }
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, code)
-                addViewModel.setTakePicture()
             }
         }
         return binding.root

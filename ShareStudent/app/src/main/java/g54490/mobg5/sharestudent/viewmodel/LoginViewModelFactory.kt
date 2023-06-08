@@ -8,7 +8,7 @@ class LoginViewModelFactory(private val application: Application): ViewModelProv
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(application) as T
+            return LoginViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

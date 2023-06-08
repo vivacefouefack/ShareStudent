@@ -9,13 +9,8 @@ import g54490.mobg5.sharestudent.model.Repository
 
 class AddViewModel:ViewModel() {
 
-    private var _userlog = MutableLiveData<String>()
-    var userlog: String
+    private var userlog: String
         get() = Repository.getUsername()
-
-    private var _image = MutableLiveData<Int>()
-    private val image: LiveData<Int>
-        get() = _image
 
     private var _title = MutableLiveData<CharSequence>()
     private val title: LiveData<CharSequence>
@@ -38,15 +33,10 @@ class AddViewModel:ViewModel() {
     val galleryPress: LiveData<Boolean?>
         get() = _galleryPress
 
-    private var _takePicture = MutableLiveData<Boolean?>()
-    val takePicture: LiveData<Boolean?>
-        get() = _takePicture
-
     private var imageName=System.currentTimeMillis().toString()+".jpg"
 
     init {
         userlog= Repository.getUsername()
-        _image.value =1
         _title.value =""
         _description.value =""
         _publishPress.value=null
@@ -55,33 +45,26 @@ class AddViewModel:ViewModel() {
     }
 
     fun titleText(s: CharSequence, start: Int, before: Int, count: Int) {
+        Log.i("insert",""+start+before+count)
         _title.value = s.toString()
     }
 
     fun descriptionText(s: CharSequence, start: Int, before: Int, count: Int) {
+        Log.i("insert",""+start+before+count)
         _description.value = s.toString()
     }
 
     fun checkDataAndCreatePublication(){
         if(_title.value.toString().isNotEmpty() && _description.value.toString().isNotEmpty()){
-            //imageName=System.currentTimeMillis().toString()
-            Log.i("insert",_title.value.toString())
-            Log.i("insert",_description.value.toString())
-            Log.i("insert",Repository.getUsername())
-            Log.i("insert",imageName)
             try {
                Repository.createPublication(Publication("","images/"+imageName,_title.value.toString(),_description.value.toString(),userlog))
             }catch (e:Exception){
-
+                e.message
             }
             this._publishPress.value=true
         }else{
             _publishPress.value=false
         }
-    }
-
-    fun setTakePicture(){
-        _takePicture.value=false
     }
 
     fun getImageName(): String {
