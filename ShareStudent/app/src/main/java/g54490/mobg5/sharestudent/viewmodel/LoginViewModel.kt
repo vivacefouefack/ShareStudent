@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,12 +34,10 @@ class LoginViewModel :ViewModel() {
     }
 
     fun emailEnter(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _email.value = s.toString()
     }
 
     fun passwordEnter(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _password.value = s.toString()
     }
 

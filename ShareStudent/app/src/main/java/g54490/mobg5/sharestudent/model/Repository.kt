@@ -1,5 +1,6 @@
 package g54490.mobg5.sharestudent.model
 
+import android.annotation.SuppressLint
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
@@ -8,19 +9,15 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import io.grpc.Context.Storage
 
 object Repository{
     private  var username=""
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    @SuppressLint("StaticFieldLeak")
     private val db = Firebase.firestore
     private var storage= FirebaseStorage.getInstance()
     private var publicationLists:MutableList<Publication> = mutableListOf()
     private var myPublicationList:MutableList<Publication> = mutableListOf()
-
-    var isWifiConn: Boolean = false
-    var isMobileConn: Boolean = false
-    var canRead: Boolean = true
 
     var pub=Publication("","","","","")
 
@@ -30,7 +27,6 @@ object Repository{
 
     fun setUsername(name:String){
         this.username=name
-        getmyPublication()
     }
 
     fun getAuth(): FirebaseAuth {
@@ -49,21 +45,21 @@ object Repository{
         return storage
     }
 
-    init {
-        //readData()
-    }
-
     fun getMyPublications(): MutableList<Publication> {
+        if (myPublicationList.isNotEmpty()){
+            myPublicationList.removeAll(myPublicationList)
+        }
+        getmyPublication()
         return myPublicationList
     }
 
-    fun getmyPublication(){
+   private fun getmyPublication(){
         for (publication in publicationLists) {
             if (publication.author== username){
                 myPublicationList.add(publication)
             }
         }
-    }
+   }
 
     fun createPublication(pub: Publication){
         val publication = hashMapOf(

@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,12 +44,10 @@ class AddViewModel:ViewModel() {
     }
 
     fun titleText(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _title.value = s.toString()
     }
 
     fun descriptionText(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _description.value = s.toString()
     }
 

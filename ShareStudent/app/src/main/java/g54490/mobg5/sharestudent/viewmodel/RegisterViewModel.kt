@@ -40,12 +40,10 @@ class RegisterViewModel :ViewModel() {
     }
 
     fun emailInput(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _email.value = s.toString()
     }
 
     fun passwordInput(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _password.value = s.toString()
     }
 

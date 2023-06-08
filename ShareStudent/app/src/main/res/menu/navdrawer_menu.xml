@@ -6,10 +6,6 @@
         android:id="@+id/aboutFragment"
         android:icon="@drawable/about"
         android:title="@string/about" />
-    <item
-        android:id="@+id/messages"
-        android:icon="@drawable/message"
-        android:title="@string/messageries" />
 
     <item
         android:id="@+id/profileFragment"

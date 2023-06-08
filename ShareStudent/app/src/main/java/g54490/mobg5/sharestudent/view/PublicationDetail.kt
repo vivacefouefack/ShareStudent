@@ -42,17 +42,17 @@ class PublicationDetail : Fragment() {
     @SuppressLint("IntentReset")
     private fun sendEmail(recipient: String, subject: String) {
         val mIntent = Intent(Intent.ACTION_SEND)
-        val message="je suis interessé par  la publication,est ce quelle est toujours disponible?"
+        val message="je suis interessé par  la publication,est ce qu'elle est toujours disponible?"
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
         mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
         try {
-            startActivity(Intent.createChooser(mIntent, "Choose Email"))
+            startActivity(Intent.createChooser(mIntent, "choisir la boite emaile"))
         }
         catch (e: Exception){
-            Toast.makeText(this.activity, "send", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, "envoyé", Toast.LENGTH_LONG).show()
         }
 
     }

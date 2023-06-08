@@ -4,9 +4,11 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -44,27 +46,30 @@ class AddPublication : Fragment() {
         val addViewModelFactory= AddViewModelFactory()
         addViewModel= ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.addViewModel=addViewModel
+        val connMgr = this.requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         addViewModel.publishPress.observe(viewLifecycleOwner) {
             if (it == true) {
                 val progressDialog = ProgressDialog(requireContext())
                 progressDialog.setTitle("Uploading...")
-                progressDialog.setMessage("Uploading your image")
+                progressDialog.setMessage("Uploading your publication")
                 progressDialog.show()
-                Repository.getStorage().getReference("images").child(addViewModel.getImageName())
-                    .putFile(imageUri).addOnSuccessListener {
-                        progressDialog.dismiss()
-                        Toast.makeText(requireContext(), "image Uploaded", Toast.LENGTH_SHORT)
-                            .show()
-                    }.addOnFailureListener {
-                        progressDialog.dismiss()
-                        Toast.makeText(
-                            requireContext(),
-                            "Fail to Upload Image..",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                Repository.readData()
+                if (Repository.isOnline(connMgr)){
+                    Repository.getStorage().getReference("images").child(addViewModel.getImageName())
+                        .putFile(imageUri).addOnSuccessListener {
+                            progressDialog.dismiss()
+                            Toast.makeText(requireContext(), "publication Uploaded", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener {
+                            progressDialog.dismiss()
+                            Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    binding.imageView5.setImageURI(Uri.parse(""))
+                    Repository.readData()
+                }else{
+                    Toast.makeText(requireContext(), "connexion error", Toast.LENGTH_LONG).show()
+                }
+
             }
             if (it == false) {
                 binding.titre.error = "invalid"
@@ -117,12 +122,8 @@ class AddPublication : Fragment() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+        grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        /*if (requestCode==code && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-
-        }*/
     }
 
     private fun saveMediaToStorage(bitmap: Bitmap) {
