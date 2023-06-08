@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import g54490.mobg5.sharestudent.databinding.ListeItemPublicationBinding
 import g54490.mobg5.sharestudent.model.Publication
 
-class PublicationAdapter(val clickListener:PublicationListener):androidx.recyclerview.widget.ListAdapter<Publication,PublicationAdapter.ViewHolder>(PublicationDiffCallback()){
-
+class PublicationAdapter(private val clickListener:PublicationListener):androidx.recyclerview.widget.ListAdapter<Publication,PublicationAdapter.ViewHolder>(PublicationDiffCallback()){
 
     class ViewHolder private constructor(val binding: ListeItemPublicationBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: Publication, clickListener: PublicationListener) {
@@ -29,22 +28,19 @@ class PublicationAdapter(val clickListener:PublicationListener):androidx.recycle
         return ViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: PublicationAdapter.ViewHolder, position: Int) {
-        //FIXME (QHB) :avoid using the !! operator. This bypass the kotlin protection against nullpointer exceptions
-        holder.bind(getItem(position)!!,clickListener)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position),clickListener)
     }
 }
 class PublicationListener(val clickListener: (id: String) -> Unit) {
     fun onClick(pub: Publication) = clickListener(pub.id)
 }
 
-class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {
-    override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {
-        return oldItem.id== newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Publication, newItem: Publication): Boolean {
+    class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {
+        override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {
+            return oldItem.id== newItem.id
+        }
+        override fun areContentsTheSame(oldItem: Publication, newItem: Publication): Boolean {
         return oldItem == newItem
     }
-
 }
