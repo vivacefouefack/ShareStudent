@@ -33,6 +33,7 @@ object Repository{
         return auth
     }
 
+    //FIXME (QHB) :why do you return a MutableList and not a List?
     fun getAllPublications(): MutableList<Publication> {
         return publicationLists
     }
@@ -107,6 +108,7 @@ object Repository{
     }
 
     fun isOnline(connMgr: ConnectivityManager): Boolean {
+        //FIXME (QHB) : don't user deprecated methods
         val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
         return networkInfo?.isConnected == true
     }

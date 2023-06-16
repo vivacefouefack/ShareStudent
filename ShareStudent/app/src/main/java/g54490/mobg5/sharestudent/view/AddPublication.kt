@@ -65,6 +65,7 @@ class AddPublication : Fragment() {
                             ).show()
                         }
                     binding.imageView5.setImageURI(Uri.parse(""))
+                    //FIXME (QHB) : readData should be called in the home screen
                     Repository.readData()
                 }else{
                     Toast.makeText(requireContext(), "connexion error", Toast.LENGTH_LONG).show()
@@ -113,6 +114,7 @@ class AddPublication : Fragment() {
 
         if (resultCode == RESULT_OK && requestCode==code){
             val picture:Bitmap?=data?.getParcelableExtra("data")
+            //FIXME (QHB) : dont use !! to avoid null pointer exception
             saveMediaToStorage(picture!!)
             imageUri = captureImageUri
             binding.imageView5.setImageBitmap(picture)
@@ -126,6 +128,7 @@ class AddPublication : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    //FIXME (QHB) : this method should be in the viewmodel or other separate class
     private fun saveMediaToStorage(bitmap: Bitmap) {
         addViewModel.setImageName(System.currentTimeMillis().toString()+".jpg")
         val filename=addViewModel.getImageName()

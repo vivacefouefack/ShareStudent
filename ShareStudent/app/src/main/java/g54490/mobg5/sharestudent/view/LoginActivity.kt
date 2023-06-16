@@ -33,8 +33,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginViewModel=loginViewModel
         loginViewModel.canConnect.observe(this) {
+            //FIXME (QHB) :rely on the onFailure listener of Firebase to check connectivity issues, not on ConnectivityManager
             val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             if (Repository.isOnline(connMgr)) {
+                //FIXME (QHB) : readData should be called in the home screen
                 Repository.readData()
                 if (it == true) {
                     val intent = Intent(this, MainActivity::class.java)
@@ -43,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.inputPassword.text = null
                 }
                 if (it == false) {
+                    //FIXME (QHB) :don't use hardcoded strings, use string resources.
                     binding.inputEmail.error = "invalid"
                     binding.inputPassword.error = "invalid"
                 }

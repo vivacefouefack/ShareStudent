@@ -43,6 +43,7 @@ class LoginViewModel :ViewModel() {
 
     fun checkData(){
         if (isValidEmail(email.value) && password.value.toString().isNotEmpty()){
+            //FIXME (QHB) : add a onFailure listener to handle errors surch as Server down
             Repository.getAuth().signInWithEmailAndPassword(email.value.toString(),password.value.toString()).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Repository.setUsername(email.value.toString())

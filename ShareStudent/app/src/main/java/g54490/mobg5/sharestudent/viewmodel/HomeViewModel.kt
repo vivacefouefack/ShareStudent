@@ -29,6 +29,7 @@ class HomeViewModel:ViewModel() {
     }
 
     init {
+        // //FIXME (QHB) :refactor this. Fragment should observe LiveData from ViewModel assigned to LiveData in Repository
         _allPublication.value=Repository.getAllPublications()
         _addPublication.value=null
         _canNavigate.value=null

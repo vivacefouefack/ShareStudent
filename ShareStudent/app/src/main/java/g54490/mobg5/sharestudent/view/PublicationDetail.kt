@@ -42,6 +42,7 @@ class PublicationDetail : Fragment() {
     @SuppressLint("IntentReset")
     private fun sendEmail(recipient: String, subject: String) {
         val mIntent = Intent(Intent.ACTION_SEND)
+        //FIXME (QHB) : use string resources instead of hardcoded strings
         val message="je suis interessé par  la publication,est ce qu'elle est toujours disponible?"
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"

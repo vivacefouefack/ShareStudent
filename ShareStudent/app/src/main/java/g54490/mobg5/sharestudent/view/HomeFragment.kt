@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
 
+        //FIXME (QHB) : write DataBindingUtil.inflate<FragmentHomeBinding> and import the class instead of this ong line.
         val binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
         val homeViewModelFactory=HomeViewModelFactory()
         homeViewModel=ViewModelProvider(this,homeViewModelFactory)[HomeViewModel::class.java]
