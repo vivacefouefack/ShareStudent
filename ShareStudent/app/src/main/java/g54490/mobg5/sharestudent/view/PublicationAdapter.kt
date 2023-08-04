@@ -36,11 +36,11 @@ class PublicationListener(val clickListener: (id: String) -> Unit) {
     fun onClick(pub: Publication) = clickListener(pub.id)
 }
 
-    class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {
-        override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {
-            return oldItem.id== newItem.id
-        }
-        override fun areContentsTheSame(oldItem: Publication, newItem: Publication): Boolean {
+class PublicationDiffCallback : DiffUtil.ItemCallback<Publication>() {
+    override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {
+        return oldItem.id== newItem.id
+    }
+    override fun areContentsTheSame(oldItem: Publication, newItem: Publication): Boolean {
         return oldItem == newItem
     }
 }

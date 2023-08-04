@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentLogoutBinding
 import g54490.mobg5.sharestudent.model.Repository
-
 class LogoutFragment : Fragment() {
     private lateinit var binding: FragmentLogoutBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

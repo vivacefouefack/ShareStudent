@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/home2"
         android:name="g54490.mobg5.sharestudent.view.HomeFragment"
-        android:label="share student"
+        android:label="@string/homeName"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home2_to_addPublication2"
@@ -21,12 +21,12 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="g54490.mobg5.sharestudent.view.AboutFragment"
-        android:label="About"
+        android:label="@string/about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/addPublication2"
         android:name="g54490.mobg5.sharestudent.view.AddPublication"
-        android:label="Créer une publication"
+        android:label="@string/createPub"
         tools:layout="@layout/fragment_add_publication">
         <action
             android:id="@+id/action_addPublication2_to_home2"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/publicationDetail"
         android:name="g54490.mobg5.sharestudent.view.PublicationDetail"
-        android:label="Détail"
+        android:label="@string/retail"
         tools:layout="@layout/fragment_publication_detail">
         <action
             android:id="@+id/action_publicationDetail_to_home2"
@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="g54490.mobg5.sharestudent.view.ProfileFragment"
-        android:label="profile"
+        android:label="@string/profil"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_home2"

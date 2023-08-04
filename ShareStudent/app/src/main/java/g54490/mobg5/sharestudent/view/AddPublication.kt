@@ -68,13 +68,13 @@ class AddPublication : Fragment() {
                     //FIXME (QHB) : readData should be called in the home screen
                     Repository.readData()
                 }else{
-                    Toast.makeText(requireContext(), "connexion error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.connexionError), Toast.LENGTH_LONG).show()
                 }
 
             }
             if (it == false) {
-                binding.titre.error = "invalid"
-                binding.description.error = "invalid"
+                binding.titre.error = getString(R.string.invalid)
+                binding.description.error = getString(R.string.invalid)
             }
         }
 
@@ -113,7 +113,7 @@ class AddPublication : Fragment() {
         }
 
         if (resultCode == RESULT_OK && requestCode==code){
-            val picture:Bitmap?=data?.getParcelableExtra("data")
+            val picture:Bitmap?=data?.getParcelableExtra(getString(R.string.dataName))
             //FIXME (QHB) : dont use !! to avoid null pointer exception
             saveMediaToStorage(picture!!)
             imageUri = captureImageUri

@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -38,22 +37,19 @@ class PublicationDetail : Fragment() {
         return binding.root
     }
 
-
-    @SuppressLint("IntentReset")
     private fun sendEmail(recipient: String, subject: String) {
         val mIntent = Intent(Intent.ACTION_SEND)
-        //FIXME (QHB) : use string resources instead of hardcoded strings
-        val message="je suis interessé par  la publication,est ce qu'elle est toujours disponible?"
+        val message=getString(R.string.message)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
         mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
         try {
-            startActivity(Intent.createChooser(mIntent, "choisir la boite emaile"))
+            startActivity(Intent.createChooser(mIntent, getString(R.string.choix)))
         }
         catch (e: Exception){
-            Toast.makeText(this.activity, "envoyé", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.sent), Toast.LENGTH_LONG).show()
         }
 
     }

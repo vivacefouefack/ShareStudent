@@ -23,15 +23,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         binding=  DataBindingUtil.setContentView(this,R.layout.activity_login)
         val loginViewModelFactory= LoginViewModelFactory(this.application)
         loginViewModel=ViewModelProvider(this,loginViewModelFactory)[LoginViewModel::class.java]
-
         val addViewModelFactory=AddViewModelFactory()
         add=ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
-
         binding.loginViewModel=loginViewModel
+
         loginViewModel.canConnect.observe(this) {
             //FIXME (QHB) :rely on the onFailure listener of Firebase to check connectivity issues, not on ConnectivityManager
             val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -45,12 +43,11 @@ class LoginActivity : AppCompatActivity() {
                     binding.inputPassword.text = null
                 }
                 if (it == false) {
-                    //FIXME (QHB) :don't use hardcoded strings, use string resources.
-                    binding.inputEmail.error = "invalid"
-                    binding.inputPassword.error = "invalid"
+                    binding.inputEmail.error = getString(R.string.invalid)
+                    binding.inputPassword.error = getString(R.string.invalid)
                 }
             } else {
-                Toast.makeText(this@LoginActivity, "connexion error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.connexionError), Toast.LENGTH_LONG).show()
             }
         }
 
