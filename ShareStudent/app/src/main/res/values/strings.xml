@@ -21,7 +21,7 @@
     <string name="registerPage">Register</string>
     <string name="confirm_passwordText">confirm password</string>
     <string name="createPub">create a post</string>
-    <string name="d_connexion">déconnexion</string>
+    <string name="d_connexion">logout</string>
     <string name="publications">publications</string>
     <string name="profil">profile</string>
     <string name="retail">retail</string>

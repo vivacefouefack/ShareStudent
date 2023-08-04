@@ -34,11 +34,11 @@ Les données sont persistées via firebase.
 ## TODO (QHB)
 bug : les messages d'erreur ne sont pas visibles dans l'écran d'enregistrement--
 bug : après que l'utilisateur ait autorisé la caméra, l'écran de connexion s'affiche à nouveau. Au lieu de cela, la caméra devrait apparaître. 
-bug : Dans l'écran "créer un publication", le fait de taper enter après un mot efface le champ de texte. 
+bug : Dans l'écran "créer un publication", le fait de taper enter après un mot efface le champ de texte.-- 
 bug : L'application devrait revenir à l'écran home après un clic sur "Publier".
 bug : le bouton back ne devrait pas revenir à l'écran login. 
 bug : vérifier que la liste dans l'écran home n'est jamais vide. 
-bug : quand l'utilisateur entre un mauvais user/password, puis va dans l'écran register, l'enregistrement ne fonctionne plus.
+bug : quand l'utilisateur entre un mauvais user/password, puis va dans l'écran register, l'enregistrement ne fonctionne plus.--
 amélioration : l'utilisateur doit pouvoir éditer une anonce publiée
 amélioration : refaire les layouts
 amélioration : les titres des ecrans doivent tous être en francais ou en anglais, mais pas les deux.-- 

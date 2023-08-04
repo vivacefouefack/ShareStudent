@@ -57,6 +57,10 @@ class LoginViewModel :ViewModel() {
         }
     }
 
+    fun updateCanconnect(){
+        _canConnect.value=null
+    }
+
     fun goToRegisterUi(){
         _canGoToRegisterUi.value=true
     }

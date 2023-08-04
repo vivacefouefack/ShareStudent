@@ -53,6 +53,9 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.canGoToRegisterUi.observe(this) {
             if (it == true) {
+                binding.inputEmail.text = null
+                binding.inputPassword.text = null
+                loginViewModel.updateCanconnect()
                 val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
             }
