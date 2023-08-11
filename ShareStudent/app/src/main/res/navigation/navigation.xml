@@ -30,9 +30,7 @@
         tools:layout="@layout/fragment_add_publication">
         <action
             android:id="@+id/action_addPublication2_to_home2"
-            app:destination="@id/home2"
-            app:popUpTo="@+id/home2"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/home2" />
     </fragment>
     <fragment
         android:id="@+id/publicationDetail"

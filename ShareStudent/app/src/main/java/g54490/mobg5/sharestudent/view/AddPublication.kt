@@ -14,6 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentAddPublicationBinding
 import g54490.mobg5.sharestudent.model.Repository
@@ -49,12 +51,16 @@ class AddPublication : Fragment() {
         val connMgr = this.requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         addViewModel.publishPress.observe(viewLifecycleOwner) {
+            Log.i("publish","click")
             if (it == true) {
+                Log.i("publish","correct form")
                 val progressDialog = ProgressDialog(requireContext())
                 progressDialog.setTitle("Uploading...")
                 progressDialog.setMessage("Uploading your publication")
                 progressDialog.show()
+                Log.i("publish","animation terminéé")
                 if (Repository.isOnline(connMgr)){
+                    Log.i("publish","connexion activée")
                     Repository.getStorage().getReference("images").child(addViewModel.getImageName())
                         .putFile(imageUri).addOnSuccessListener {
                             progressDialog.dismiss()
@@ -64,15 +70,20 @@ class AddPublication : Fragment() {
                             Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
                             ).show()
                         }
+                    Log.i("publish","image publiée")
                     binding.imageView5.setImageURI(Uri.parse(""))
                     //FIXME (QHB) : readData should be called in the home screen
                     Repository.readData()
+                    this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
+
                 }else{
+                    Log.i("publish","no connexion")
                     Toast.makeText(requireContext(), getString(R.string.connexionError), Toast.LENGTH_LONG).show()
                 }
 
             }
             if (it == false) {
+                Log.i("publish","error form")
                 binding.titre.error = getString(R.string.invalid)
                 binding.description.error = getString(R.string.invalid)
             }
