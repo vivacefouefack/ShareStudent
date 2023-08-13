@@ -34,8 +34,6 @@ class LoginActivity : AppCompatActivity() {
             //FIXME (QHB) :rely on the onFailure listener of Firebase to check connectivity issues, not on ConnectivityManager
             val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             if (Repository.isOnline(connMgr)) {
-                //FIXME (QHB) : readData should be called in the home screen
-                Repository.readData()
                 if (it == true) {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

@@ -1,5 +1,6 @@
 package g54490.mobg5.sharestudent.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,12 +29,23 @@ class HomeViewModel:ViewModel() {
         _navigateToPublicationDetail.value = id
     }
 
-    init {
-        // //FIXME (QHB) :refactor this. Fragment should observe LiveData from ViewModel assigned to LiveData in Repository
-        _allPublication.value=Repository.getAllPublications()
-        _addPublication.value=null
-        _canNavigate.value=null
-    }
+   init {
+       // //FIXME (QHB) :refactor this. Fragment should observe LiveData from ViewModel assigned to LiveData in Repository
+       Log.d("homeViewModel","init")
+       Repository.readData(object:Repository.FirebaseSuccessListener{
+           override fun onSuccess(publications: MutableList<Publication>){
+               _allPublication.value=publications
+               Log.d("homeViewModel", (_allPublication.value as MutableList<Publication>).size.toString())
+               _addPublication.value=null
+               _canNavigate.value=null
+           }
+
+           override fun onError(){
+               Log.d("homeViewModel","erreur")
+           }
+       })
+
+   }
 
     fun setAddButton(){
         _addPublication.value=false

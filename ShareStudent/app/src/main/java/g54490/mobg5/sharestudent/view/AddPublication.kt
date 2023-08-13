@@ -70,20 +70,15 @@ class AddPublication : Fragment() {
                             Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
                             ).show()
                         }
-                    Log.i("publish","image publiée")
                     binding.imageView5.setImageURI(Uri.parse(""))
-                    //FIXME (QHB) : readData should be called in the home screen
-                    Repository.readData()
                     this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
 
                 }else{
-                    Log.i("publish","no connexion")
                     Toast.makeText(requireContext(), getString(R.string.connexionError), Toast.LENGTH_LONG).show()
                 }
 
             }
             if (it == false) {
-                Log.i("publish","error form")
                 binding.titre.error = getString(R.string.invalid)
                 binding.description.error = getString(R.string.invalid)
             }

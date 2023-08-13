@@ -78,10 +78,14 @@ object Repository{
             }
     }
 
-    fun readData(){
-        if (publicationLists.isNotEmpty()){
-            publicationLists.removeAll(publicationLists)
-        }
+    interface FirebaseSuccessListener {
+        fun onSuccess(publications: MutableList<Publication>)
+        fun onError()
+    }
+
+    fun readData(callback: FirebaseSuccessListener) {
+        val publicationLists = mutableListOf<Publication>() // Créez la liste ici
+
         db.collection("publication")
             .get().addOnSuccessListener { result ->
                 for (document in result) {
@@ -93,9 +97,13 @@ object Repository{
                         document.data["author"] as String
                     ))
                 }
+                Log.d("repo", "success")
+                callback.onSuccess(publicationLists) // Appel onSuccess avec la liste complète
+                Log.d("repo", Repository.publicationLists.size.toString())
             }
             .addOnFailureListener { exception ->
-                Log.w("error", "Error getting documents.", exception)
+                Log.d("error", "Error getting documents.", exception)
+                callback.onError() // Appel onError en cas d'erreur
             }
     }
 
