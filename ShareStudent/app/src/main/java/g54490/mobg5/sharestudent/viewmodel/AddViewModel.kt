@@ -1,10 +1,19 @@
 package g54490.mobg5.sharestudent.viewmodel
 
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.model.Repository
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 class AddViewModel:ViewModel() {
 
@@ -33,6 +42,7 @@ class AddViewModel:ViewModel() {
         get() = _galleryPress
 
     private var imageName=System.currentTimeMillis().toString()+".jpg"
+    lateinit var captureImageUri: Uri
 
     init {
         userlog= Repository.getUsername()
@@ -78,5 +88,33 @@ class AddViewModel:ViewModel() {
     fun setGalleryPress(){
         _galleryPress.value=true
     }
+
+    /*fun saveMediaToStorage(bitmap: Bitmap) {
+        setImageName(System.currentTimeMillis().toString()+".jpg")
+        val filename=getImageName()
+        var fos: OutputStream? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            context?.contentResolver?.also { resolver ->
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+
+                val imageUri: Uri? =
+                    resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                captureImageUri=imageUri!!
+                fos = imageUri.let { resolver.openOutputStream(it) }
+            }
+        } else {
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+        }
+    }*/
 
 }

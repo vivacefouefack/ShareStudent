@@ -1,6 +1,7 @@
 package g54490.mobg5.sharestudent.view
 
 import android.Manifest
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.ContentValues
@@ -121,13 +122,16 @@ class AddPublication : Fragment() {
         if (resultCode == RESULT_OK && requestCode==code){
             val picture:Bitmap?=data?.getParcelableExtra(getString(R.string.dataName))
             //FIXME (QHB) : dont use !! to avoid null pointer exception
-            saveMediaToStorage(picture!!)
+            //saveMediaToStorage(picture!!)
+            if (picture != null) {
+                saveMediaToStorage(picture)
+            }
             imageUri = captureImageUri
             binding.imageView5.setImageBitmap(picture)
         }
     }
 
-    override fun onRequestPermissionsResult(
+    override fun  onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray) {

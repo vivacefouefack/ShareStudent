@@ -31,6 +31,9 @@ class RegisterActivity : AppCompatActivity() {
                     binding.emailInputEt.text = null
                     binding.passwordInputEt.text = null
                     binding.confirmPasswordInputEt.text = null
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                     finish()
                 }
                 if (it == false) {

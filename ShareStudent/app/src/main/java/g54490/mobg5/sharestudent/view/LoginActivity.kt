@@ -39,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     binding.inputEmail.text = null
                     binding.inputPassword.text = null
+                    finish()
                 }
                 if (it == false) {
                     binding.inputEmail.error = getString(R.string.invalid)

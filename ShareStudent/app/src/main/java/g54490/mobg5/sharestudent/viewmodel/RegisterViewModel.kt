@@ -65,6 +65,7 @@ class RegisterViewModel :ViewModel() {
         if (isValidEmail() && isValidpassword()){
             Repository.getAuth().createUserWithEmailAndPassword(_email.value.toString(),_password.value.toString()).addOnCompleteListener {
                 if(it.isSuccessful) {
+                    Repository.setUsername(_email.value.toString())
                     _createUser.value=true
                 } else {
                     this._createUser.value=false
