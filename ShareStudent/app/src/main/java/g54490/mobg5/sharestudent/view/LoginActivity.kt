@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -26,26 +27,25 @@ class LoginActivity : AppCompatActivity() {
         binding=  DataBindingUtil.setContentView(this,R.layout.activity_login)
         val loginViewModelFactory= LoginViewModelFactory(this.application)
         loginViewModel=ViewModelProvider(this,loginViewModelFactory)[LoginViewModel::class.java]
-        //val addViewModelFactory=AddViewModelFactory()
-        //add=ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.loginViewModel=loginViewModel
 
+        loginViewModel.wrongPassword.observe(this){
+            if (it==true){
+                Toast.makeText(this@LoginActivity, getString(R.string.wrongPass), Toast.LENGTH_LONG).show()
+            }
+        }
+
         loginViewModel.canConnect.observe(this) {
-            //FIXME (QHB) :rely on the onFailure listener of Firebase to check connectivity issues, not on ConnectivityManager
-            val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (Repository.isOnline(connMgr)) {
-                if (it == true) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    binding.inputEmail.text = null
-                    binding.inputPassword.text = null
-                    finish()
-                }
-                if (it == false) {
-                    binding.inputEmail.error = getString(R.string.invalid)
-                    binding.inputPassword.error = getString(R.string.invalid)
-                }
-            } else {
+            if (it == true) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                binding.inputEmail.text = null
+                binding.inputPassword.text = null
+                finish()
+            }
+            if (it == false) {
+                binding.inputEmail.error = getString(R.string.invalid)
+                binding.inputPassword.error = getString(R.string.invalid)
                 Toast.makeText(this@LoginActivity, getString(R.string.connexionError), Toast.LENGTH_LONG).show()
             }
         }

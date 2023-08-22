@@ -1,8 +1,10 @@
 package g54490.mobg5.sharestudent.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuthException
 import g54490.mobg5.sharestudent.model.Repository
 
 class LoginViewModel :ViewModel() {
@@ -18,6 +20,10 @@ class LoginViewModel :ViewModel() {
     val canConnect: LiveData<Boolean?>
         get() = _canConnect
 
+    private val _wrongPassword = MutableLiveData<Boolean?>()
+    val wrongPassword: LiveData<Boolean?>
+        get() = _wrongPassword
+
     private val _canGoToRegisterUi = MutableLiveData<Boolean?>()
     val canGoToRegisterUi: LiveData<Boolean?>
         get() = _canGoToRegisterUi
@@ -25,7 +31,7 @@ class LoginViewModel :ViewModel() {
     init {
         _email.value =""
         _password.value =""
-        _canConnect.value=null
+        _wrongPassword.value=null
         _canGoToRegisterUi.value=false
     }
 
@@ -43,13 +49,23 @@ class LoginViewModel :ViewModel() {
 
     fun checkData(){
         if (isValidEmail(email.value) && password.value.toString().isNotEmpty()){
-            //FIXME (QHB) : add a onFailure listener to handle errors surch as Server down
             Repository.getAuth().signInWithEmailAndPassword(email.value.toString(),password.value.toString()).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Repository.setUsername(email.value.toString())
                     _canConnect.value = true
                 } else {
                     this._canConnect.value = false
+                }
+            }.addOnFailureListener { exception ->
+                if (exception is FirebaseAuthException) {
+                    val errorCode = exception.errorCode
+                    if (errorCode == "ERROR_WRONG_PASSWORD") {
+                        _wrongPassword.value=true
+                        Log.e("check", "Mot de passe incorrect")
+                    } else {
+                        _canConnect.value = false
+                        Log.e("check", "Erreur d'authentification : $errorCode")
+                    }
                 }
             }
         }else{

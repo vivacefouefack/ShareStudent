@@ -31,7 +31,7 @@ class RegisterViewModel :ViewModel() {
         _email.value =""
         _password.value =""
         _passwordConfirm.value=""
-        _createUser.value=null
+        //_createUser.value=null
         _backToLoginUi.value=null
     }
 

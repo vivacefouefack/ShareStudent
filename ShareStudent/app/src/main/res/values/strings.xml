@@ -40,6 +40,8 @@
     <string name="dataName">data</string>
     <string name="errorGetImage">error to get image from firebase</string>
     <string name="connexionError">connexion error</string>
+    <string name="onFailure">on failure</string>
+    <string name="wrongPass">wrong password</string>
     <string name="newUser">new user</string>
     <string name="choix">choisir la boite emaile</string>
     <string name="sent">envoyé</string>
