@@ -1,25 +1,32 @@
 package g54490.mobg5.sharestudent.model
 
-import android.annotation.SuppressLint
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 object Repository{
     private  var username=""
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    @SuppressLint("StaticFieldLeak")
-    private val db = Firebase.firestore
+    private val db: FirebaseFirestore by lazy {//une référence statique à une classe liée au contexte Android ne peut etre stocker dans un champ statique
+        FirebaseFirestore.getInstance()
+    }
     private var storage= FirebaseStorage.getInstance()
     private var publicationLists:MutableList<Publication> = mutableListOf()
     private var myPublicationList:MutableList<Publication> = mutableListOf()
-
     var pub=Publication("","","","","")
+
+    private val _publicationList = MutableLiveData<MutableList<Publication>?>()
+    val publicationList: MutableLiveData<MutableList<Publication>?>
+        get() = _publicationList
+
+    init {
+        _publicationList.value=null
+    }
 
     fun getUsername():String{
         return username
@@ -33,10 +40,10 @@ object Repository{
         return auth
     }
 
-    //FIXME (QHB) :why do you return a MutableList and not a List?
+    /*j'ai opté pour renvoyer une MutableList en raison des besoins spécifiques de flexibilité et de manipulation des données dans l'application
     fun getAllPublications(): MutableList<Publication> {
         return publicationLists
-    }
+    }*/
 
     fun getStorageReference(): StorageReference {
         return storage.reference
@@ -84,10 +91,9 @@ object Repository{
     }
 
     fun readData(callback: FirebaseSuccessListener) {
-        val publicationLists = mutableListOf<Publication>() // Créez la liste ici
-
         db.collection("publication")
             .get().addOnSuccessListener { result ->
+                publicationLists.removeAll(publicationLists)
                 for (document in result) {
                     publicationLists.add(Publication(
                         document.id,
@@ -96,13 +102,22 @@ object Repository{
                         document.data["description"] as String,
                         document.data["author"] as String
                     ))
+
+                    /*publicationList.value?.add(
+                        Publication(
+                            document.id,
+                            document.data["image"] as String,
+                            document.data["title"] as String,
+                            document.data["description"] as String,
+                            document.data["author"] as String
+                        )
+                    )*/
                 }
-                Log.d("repo", "success")
+                Log.i("check","readData")
+                Log.i("check", _publicationList.value?.size.toString())
                 callback.onSuccess(publicationLists) // Appel onSuccess avec la liste complète
-                Log.d("repo", Repository.publicationLists.size.toString())
             }
             .addOnFailureListener { exception ->
-                Log.d("error", "Error getting documents.", exception)
                 callback.onError() // Appel onError en cas d'erreur
             }
     }

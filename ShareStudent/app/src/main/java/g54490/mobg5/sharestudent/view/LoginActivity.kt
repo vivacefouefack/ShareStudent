@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         binding=  DataBindingUtil.setContentView(this,R.layout.activity_login)
         val loginViewModelFactory= LoginViewModelFactory(this.application)
         loginViewModel=ViewModelProvider(this,loginViewModelFactory)[LoginViewModel::class.java]
-        val addViewModelFactory=AddViewModelFactory()
-        add=ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
+        //val addViewModelFactory=AddViewModelFactory()
+        //add=ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.loginViewModel=loginViewModel
 
         loginViewModel.canConnect.observe(this) {

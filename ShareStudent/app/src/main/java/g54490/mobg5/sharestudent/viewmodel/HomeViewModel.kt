@@ -9,8 +9,8 @@ import g54490.mobg5.sharestudent.model.Repository
 
 class HomeViewModel:ViewModel() {
 
-    private var _allPublication = MutableLiveData<List<Publication>>()
-    val allPublication: LiveData<List<Publication>>
+    private var _allPublication = MutableLiveData<List<Publication>?>()
+    val allPublication: MutableLiveData<List<Publication>?>
         get() = _allPublication
 
     private var _addPublication = MutableLiveData<Boolean?>()
@@ -29,23 +29,33 @@ class HomeViewModel:ViewModel() {
         _navigateToPublicationDetail.value = id
     }
 
+
+
    init {
        // //FIXME (QHB) :refactor this. Fragment should observe LiveData from ViewModel assigned to LiveData in Repository
-       Log.d("homeViewModel","init")
-       Repository.readData(object:Repository.FirebaseSuccessListener{
-           override fun onSuccess(publications: MutableList<Publication>){
-               _allPublication.value=publications
-               Log.d("homeViewModel", (_allPublication.value as MutableList<Publication>).size.toString())
-               _addPublication.value=null
-               _canNavigate.value=null
-           }
-
-           override fun onError(){
-               Log.d("homeViewModel","erreur")
-           }
-       })
-
+       _addPublication.value=null
+       _canNavigate.value=null
    }
+
+    fun getData(){
+        Repository.readData(object:Repository.FirebaseSuccessListener{
+            override fun onSuccess(publications: MutableList<Publication>){
+                _allPublication.value=null
+                _allPublication.value=publications
+                /*if (_allPublication.value?.isNotEmpty() == true){
+                    Log.d("homeViewModel","isNotEmpty")
+
+                }else{
+                    Log.d("homeViewModel","isEmpty")
+                    _allPublication.value=publications
+                }
+                Log.d("homeViewModel","getdata")*/
+            }
+            override fun onError(){
+                Log.d("homeViewModel","erreur")
+            }
+        })
+    }
 
     fun setAddButton(){
         _addPublication.value=false

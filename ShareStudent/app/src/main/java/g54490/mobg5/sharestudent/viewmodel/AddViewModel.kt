@@ -11,11 +11,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import g54490.mobg5.sharestudent.model.Publication
 import g54490.mobg5.sharestudent.model.Repository
+import android.content.Context
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-class AddViewModel:ViewModel() {
+class AddViewModel(private val context: Context):ViewModel() {
 
     private var userlog: String
         get() = Repository.getUsername()
@@ -42,7 +43,7 @@ class AddViewModel:ViewModel() {
         get() = _galleryPress
 
     private var imageName=System.currentTimeMillis().toString()+".jpg"
-    lateinit var captureImageUri: Uri
+    var captureImageUri: Uri=Uri.EMPTY
 
     init {
         userlog= Repository.getUsername()
@@ -89,7 +90,7 @@ class AddViewModel:ViewModel() {
         _galleryPress.value=true
     }
 
-    /*fun saveMediaToStorage(bitmap: Bitmap) {
+    fun saveMediaToStorage(bitmap: Bitmap) {
         setImageName(System.currentTimeMillis().toString()+".jpg")
         val filename=getImageName()
         var fos: OutputStream? = null
@@ -101,8 +102,7 @@ class AddViewModel:ViewModel() {
                     put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
                 }
 
-                val imageUri: Uri? =
-                    resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                 captureImageUri=imageUri!!
                 fos = imageUri.let { resolver.openOutputStream(it) }
             }
@@ -115,6 +115,6 @@ class AddViewModel:ViewModel() {
         fos?.use {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
         }
-    }*/
+    }
 
 }

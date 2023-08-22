@@ -1,6 +1,7 @@
 package g54490.mobg5.sharestudent.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -35,12 +36,12 @@ class HomeFragment : Fragment() {
             it?.let {
                 adapter.submitList(it)
             }
+            Log.d("homeViewModel","allpub")
         }
 
         homeViewModel.addPublication.observe(viewLifecycleOwner) {
             if (it == true) {
-                this.findNavController()
-                    .navigate(HomeFragmentDirections.actionHome2ToAddPublication2())
+                this.findNavController().navigate(HomeFragmentDirections.actionHome2ToAddPublication2())
                 homeViewModel.setAddButton()
             }
         }
@@ -49,12 +50,16 @@ class HomeFragment : Fragment() {
             if (publication.isNotEmpty()) {
                 publication?.let {
                     Repository.getPublicationWithId(it)
-                    this.findNavController()
-                        .navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
+                    this.findNavController().navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
                     homeViewModel.onPublicationClicked("")
                 }
             }
         }
+
+        Repository.publicationList.observe(viewLifecycleOwner){
+            homeViewModel.getData()
+        }
+
         val manager = GridLayoutManager(activity, 2)
         binding.publicationList.layoutManager = manager
         setHasOptionsMenu(true)

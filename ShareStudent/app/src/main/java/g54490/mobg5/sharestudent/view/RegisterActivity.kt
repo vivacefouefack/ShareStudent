@@ -18,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val registerViewModelFactory=RegisterViewModelFactory(this.application)
+        val registerViewModelFactory=RegisterViewModelFactory()
         registerViewModel= ViewModelProvider(this,registerViewModelFactory)[RegisterViewModel::class.java]
         binding=  DataBindingUtil.setContentView(this,R.layout.activity_register)
         binding.registerViewModel=registerViewModel
