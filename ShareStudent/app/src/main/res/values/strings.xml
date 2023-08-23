@@ -46,4 +46,5 @@
     <string name="choix">choisir la boite emaile</string>
     <string name="sent">envoyé</string>
     <string name="message">je suis interessé par  la publication,est ce qu\'elle est toujours disponible?</string>
+    <string name="drawer">drawer</string>
 </resources>

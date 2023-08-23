@@ -34,7 +34,8 @@ class RegisterActivity : AppCompatActivity() {
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()
+                    setResult(RESULT_OK)
+                    finish() //Terminer l'activité RegisterActivity
                 }
                 if (it == false) {
                     binding.emailInputEt.error = getString(R.string.invalid)
@@ -42,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                     binding.confirmPasswordInputEt.error = getString(R.string.invalid)
                 }
             } else {
-                Toast.makeText(this@RegisterActivity, getString(R.string.connexionError), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@RegisterActivity,getString(R.string.connexionError), Toast.LENGTH_LONG).show()
             }
         }
 
@@ -50,6 +51,7 @@ class RegisterActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }

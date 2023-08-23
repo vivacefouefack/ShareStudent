@@ -1,26 +1,23 @@
 package g54490.mobg5.sharestudent.view
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.ActivityLoginBinding
-import g54490.mobg5.sharestudent.model.Repository
-import g54490.mobg5.sharestudent.viewmodel.AddViewModel
-import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModel
 import g54490.mobg5.sharestudent.viewmodel.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var add: AddViewModel
+    private lateinit var activityBLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -31,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.wrongPassword.observe(this){
             if (it==true){
+                binding.inputEmail.error=null
+                binding.inputPassword.error = getString(R.string.invalid)
                 Toast.makeText(this@LoginActivity, getString(R.string.wrongPass), Toast.LENGTH_LONG).show()
             }
         }
@@ -50,13 +49,19 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        activityBLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                finish() // Terminer LoginActivity si RegisterActivity se termine avec succès
+            }
+        }
+
         loginViewModel.canGoToRegisterUi.observe(this) {
             if (it == true) {
                 binding.inputEmail.text = null
                 binding.inputPassword.text = null
                 loginViewModel.updateCanconnect()
                 val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
+                activityBLauncher.launch(intent)
             }
         }
     }
