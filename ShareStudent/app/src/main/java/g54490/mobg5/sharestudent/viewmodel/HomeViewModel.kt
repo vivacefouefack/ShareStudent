@@ -29,10 +29,7 @@ class HomeViewModel:ViewModel() {
         _navigateToPublicationDetail.value = id
     }
 
-
-
    init {
-       // //FIXME (QHB) :refactor this. Fragment should observe LiveData from ViewModel assigned to LiveData in Repository
        _addPublication.value=null
        _canNavigate.value=null
    }
@@ -42,14 +39,6 @@ class HomeViewModel:ViewModel() {
             override fun onSuccess(publications: MutableList<Publication>){
                 _allPublication.value=null
                 _allPublication.value=publications
-                /*if (_allPublication.value?.isNotEmpty() == true){
-                    Log.d("homeViewModel","isNotEmpty")
-
-                }else{
-                    Log.d("homeViewModel","isEmpty")
-                    _allPublication.value=publications
-                }
-                Log.d("homeViewModel","getdata")*/
             }
             override fun onError(){
                 Log.d("homeViewModel","erreur")

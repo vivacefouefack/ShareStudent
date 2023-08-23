@@ -14,14 +14,13 @@ import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModel
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModelFactory
+import g54490.mobg5.sharestudent.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
-
-        //FIXME (QHB) : write DataBindingUtil.inflate<FragmentHomeBinding> and import the class instead of this ong line.
-        val binding= DataBindingUtil.inflate<g54490.mobg5.sharestudent.databinding.FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
+        val binding= DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
         val homeViewModelFactory=HomeViewModelFactory()
         homeViewModel=ViewModelProvider(this,homeViewModelFactory)[HomeViewModel::class.java]
         val adapter = PublicationAdapter(PublicationListener { publicationId ->
@@ -34,7 +33,9 @@ class HomeFragment : Fragment() {
 
         homeViewModel.allPublication.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.submitList(it)
+                if (it.isNotEmpty()){
+                    adapter.submitList(it)
+                }
             }
             Log.d("homeViewModel","allpub")
         }

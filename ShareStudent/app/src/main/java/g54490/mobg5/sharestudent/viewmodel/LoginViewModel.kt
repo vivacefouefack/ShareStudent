@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -61,10 +60,8 @@ class LoginViewModel :ViewModel() {
                     val errorCode = exception.errorCode
                     if (errorCode == "ERROR_WRONG_PASSWORD") {
                         _wrongPassword.value=true
-                        Log.e("check", "Mot de passe incorrect")
                     } else {
                         _canConnect.value = false
-                        Log.e("check", "Erreur d'authentification : $errorCode")
                     }
                 }
             }

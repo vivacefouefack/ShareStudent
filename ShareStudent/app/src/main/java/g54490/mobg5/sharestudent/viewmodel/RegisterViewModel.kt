@@ -70,6 +70,8 @@ class RegisterViewModel :ViewModel() {
                 } else {
                     this._createUser.value=false
                 }
+            }.addOnFailureListener { exception ->
+                this._createUser.value=false
             }
         }else{
             _createUser.value=false

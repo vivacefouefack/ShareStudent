@@ -40,11 +40,6 @@ object Repository{
         return auth
     }
 
-    /*j'ai opté pour renvoyer une MutableList en raison des besoins spécifiques de flexibilité et de manipulation des données dans l'application
-    fun getAllPublications(): MutableList<Publication> {
-        return publicationLists
-    }*/
-
     fun getStorageReference(): StorageReference {
         return storage.reference
     }
