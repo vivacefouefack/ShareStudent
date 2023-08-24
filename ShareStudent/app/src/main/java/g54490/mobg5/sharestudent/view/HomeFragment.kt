@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
                     adapter.submitList(it)
                 }
             }
-            Log.d("homeViewModel","allpub")
         }
 
         homeViewModel.addPublication.observe(viewLifecycleOwner) {

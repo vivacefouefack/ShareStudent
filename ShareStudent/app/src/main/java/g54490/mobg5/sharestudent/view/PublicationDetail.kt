@@ -45,11 +45,12 @@ class PublicationDetail : Fragment() {
         mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
+        mIntent.setPackage("com.google.android.gm")
         try {
-            startActivity(Intent.createChooser(mIntent, getString(R.string.choix)))
+            startActivity(mIntent)
         }
         catch (e: Exception){
-            Toast.makeText(this.activity, getString(R.string.sent), Toast.LENGTH_LONG).show()
+            Toast.makeText(this.activity, getString(R.string.errorToSend), Toast.LENGTH_LONG).show()
         }
 
     }

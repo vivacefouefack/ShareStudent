@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,10 +15,6 @@ class HomeViewModel:ViewModel() {
     val addPublication: LiveData<Boolean?>
         get() = _addPublication
 
-    private var _canNavigate = MutableLiveData<Boolean?>()
-    val canNavigate: LiveData<Boolean?>
-        get() = _canNavigate
-
     private val _navigateToPublicationDetail = MutableLiveData<String>()
     val navigateToPublicationDetail
         get() = _navigateToPublicationDetail
@@ -31,14 +26,13 @@ class HomeViewModel:ViewModel() {
             _allPublication.postValue(it)
         }
         _addPublication.value=null
-        _canNavigate.value=null
     }
 
     fun onPublicationClicked(id: String) {
         _navigateToPublicationDetail.value = id
     }
 
-    fun loadPublicationsFromFirebase(){
+    private fun loadPublicationsFromFirebase(){
         Repository.readData()
     }
 
