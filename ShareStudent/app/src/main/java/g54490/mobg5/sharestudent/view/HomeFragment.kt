@@ -57,10 +57,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        Repository.publicationList.observe(viewLifecycleOwner){
-            homeViewModel.getData()
-        }
-
         val manager = GridLayoutManager(activity, 2)
         binding.publicationList.layoutManager = manager
         setHasOptionsMenu(true)

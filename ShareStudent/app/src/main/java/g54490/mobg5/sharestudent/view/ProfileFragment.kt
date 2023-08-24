@@ -31,12 +31,11 @@ class ProfileFragment : Fragment() {
         })
         binding.mesPub.adapter=adapter
 
-        profileViewModel.myPublication.observe(viewLifecycleOwner) {
+        profileViewModel.myPublicationList.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
             }
         }
-
 
         profileViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner) { publication ->
             if (publication.isNotEmpty()) {
@@ -48,7 +47,9 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
+        profileViewModel.myNbPublication.observe(viewLifecycleOwner){
+            binding.nb.text=it
+        }
 
         val manager = GridLayoutManager(activity, 2)
         binding.mesPub.layoutManager = manager

@@ -10,12 +10,13 @@ class ProfileViewModel: ViewModel(){
     val login: String
         get() = Repository.getUsername()
 
-    val nbPublication: String
-        get() =Repository.getMyPublications().size.toString()
+    var nbPublication: String = ""
 
-    private var _myPublication = MutableLiveData<List<Publication>>()
-    val myPublication: LiveData<List<Publication>>
-        get() = _myPublication
+    private val _myNbPublication = MutableLiveData<String>()
+    val myNbPublication: LiveData<String> = _myNbPublication
+
+    private val _myPublicationList = MutableLiveData<List<Publication>>()
+    val myPublicationList: LiveData<List<Publication>> = _myPublicationList
 
     private val _navigateToPublicationDetail = MutableLiveData<String>()
     val navigateToPublicationDetail
@@ -26,7 +27,14 @@ class ProfileViewModel: ViewModel(){
     }
 
     init {
-        _myPublication.value=Repository.getMyPublications()
+        loadPublicationsFromFirebase()
+        Repository.myPublicationLists.observeForever{
+            _myNbPublication.value=it.size.toString()
+            _myPublicationList.postValue(it)
+        }
+    }
+    fun loadPublicationsFromFirebase(){
+        Repository.readData()
     }
 
 }

@@ -1,10 +1,12 @@
 package g54490.mobg5.sharestudent.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,13 +29,22 @@ class PublicationDetailForProfil : Fragment() {
 
         detailViewModel.canDelete.observe(viewLifecycleOwner){
             if (it==true){
-                detailViewModel.deletePublication()
-                this.findNavController().navigate(PublicationDetailForProfilDirections.actionPublicationDetailForProfilToProfileFragment())
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle(getString(R.string.confirmationTitle))
+                builder.setMessage(getString(R.string.deleteMessage))
+                builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                    detailViewModel.deletePublication()
+                    this.findNavController().navigate(PublicationDetailForProfilDirections.actionPublicationDetailForProfilToProfileFragment())
+                }
+                builder.setNegativeButton(getString(R.string.no)) { dialog, which ->
+                    context?.let { Toast.makeText(it, getString(R.string.noDelete), Toast.LENGTH_SHORT).show()}
+                }
+                val dialog = builder.create()
+                dialog.show()
             }
         }
 
         return binding.root
     }
-
 
 }

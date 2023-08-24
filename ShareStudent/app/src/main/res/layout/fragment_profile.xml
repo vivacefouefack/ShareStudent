@@ -18,8 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ProfileFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
 
             <LinearLayout
@@ -39,6 +39,7 @@
                 android:layout_width="271dp"
                 android:layout_height="203dp"
                 android:layout_marginTop="52dp"
+                android:contentDescription="@string/welcomeText"
                 android:src="@drawable/account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,10 +73,10 @@
 
             <TextView
                 android:id="@+id/mesPublicationText"
-                android:layout_width="0dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
-                android:text="Mes Publications : "
+                android:text="@string/mes_publicationsText"
                 android:textColor="#050505"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -88,7 +89,7 @@
                 android:layout_height="29dp"
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="24dp"
-                android:text="@{profileViewModel.nbPublication}"
+                android:text="@{profileViewModel.myNbPublication}"
                 android:textColor="#070707"
                 android:textSize="24sp"
                 android:textStyle="bold"

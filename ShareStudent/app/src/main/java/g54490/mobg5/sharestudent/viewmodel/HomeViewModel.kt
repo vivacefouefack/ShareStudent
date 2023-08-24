@@ -9,9 +9,8 @@ import g54490.mobg5.sharestudent.model.Repository
 
 class HomeViewModel:ViewModel() {
 
-    private var _allPublication = MutableLiveData<List<Publication>?>()
-    val allPublication: MutableLiveData<List<Publication>?>
-        get() = _allPublication
+    private val _allPublication = MutableLiveData<List<Publication>>()
+    val allPublication: LiveData<List<Publication>> = _allPublication
 
     private var _addPublication = MutableLiveData<Boolean?>()
     val addPublication: LiveData<Boolean?>
@@ -25,25 +24,22 @@ class HomeViewModel:ViewModel() {
     val navigateToPublicationDetail
         get() = _navigateToPublicationDetail
 
+
+    init {
+        loadPublicationsFromFirebase()
+        Repository.publicationList.observeForever{
+            _allPublication.postValue(it)
+        }
+        _addPublication.value=null
+        _canNavigate.value=null
+    }
+
     fun onPublicationClicked(id: String) {
         _navigateToPublicationDetail.value = id
     }
 
-   init {
-       _addPublication.value=null
-       _canNavigate.value=null
-   }
-
-    fun getData(){
-        Repository.readData(object:Repository.FirebaseSuccessListener{
-            override fun onSuccess(publications: MutableList<Publication>){
-                _allPublication.value=null
-                _allPublication.value=publications
-            }
-            override fun onError(){
-                Log.d("homeViewModel","erreur")
-            }
-        })
+    fun loadPublicationsFromFirebase(){
+        Repository.readData()
     }
 
     fun setAddButton(){

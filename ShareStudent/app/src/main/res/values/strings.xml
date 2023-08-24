@@ -45,7 +45,14 @@
     <string name="wrongPass">wrong password</string>
     <string name="newUser">new user</string>
     <string name="choix">choisir la boite emaile</string>
+    <string name="noDelete">suppression annulée</string>
+    <string name="confirmationTitle">Confirmation de la suppression</string>
+    <string name="yes">oui</string>
+    <string name="no">non</string>
+    <string name="deleteMessage">Êtes-vous sûr de vouloir supprimer cette publication ?</string>
+
     <string name="sent">envoyé</string>
     <string name="message">je suis interessé par  la publication,est ce qu\'elle est toujours disponible?</string>
     <string name="drawer">drawer</string>
+    <string name="mes_publicationsText">Mes Publications :</string>
 </resources>

@@ -3,6 +3,7 @@ package g54490.mobg5.sharestudent.model
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,13 +21,11 @@ object Repository{
     private var myPublicationList:MutableList<Publication> = mutableListOf()
     var pub=Publication("","","","","")
 
-    private val _publicationList = MutableLiveData<MutableList<Publication>?>()
-    val publicationList: MutableLiveData<MutableList<Publication>?>
-        get() = _publicationList
+    private val _publicationList = MutableLiveData<List<Publication>>()
+    val publicationList: LiveData<List<Publication>> = _publicationList
 
-    init {
-        _publicationList.value=null
-    }
+    private val _myPublicationLists = MutableLiveData<List<Publication>>()
+    val myPublicationLists: LiveData<List<Publication>> = _myPublicationLists
 
     fun getUsername():String{
         return username
@@ -49,10 +48,6 @@ object Repository{
     }
 
     fun getMyPublications(): MutableList<Publication> {
-        if (myPublicationList.isNotEmpty()){
-            myPublicationList.removeAll(myPublicationList)
-        }
-        getmyPublication()
         return myPublicationList
     }
 
@@ -85,26 +80,39 @@ object Repository{
         fun onError()
     }
 
-    fun readData(callback: FirebaseSuccessListener) {
+    fun readData() {
         db.collection("publication")
             .get().addOnSuccessListener { result ->
-                publicationLists.removeAll(publicationLists)
+                val publications = mutableListOf<Publication>()
+                val myPublications = mutableListOf<Publication>()
+                var publicationElt=Publication("","","","","")
                 for (document in result) {
-                    publicationLists.add(Publication(
+                    publicationElt=Publication(
                         document.id,
                         document.data["image"] as String,
                         document.data["title"] as String,
                         document.data["description"] as String,
                         document.data["author"] as String
-                    ))
+                    )
+                    if (publicationElt.author== username){
+                        myPublications.add(publicationElt)
+                    }
+                    publications.add(publicationElt)
                 }
-                Log.i("check","readData")
-                Log.i("check", _publicationList.value?.size.toString())
-                callback.onSuccess(publicationLists) // Appel onSuccess avec la liste complète
+                updatePublicationList(publications)
+                updateMyPublicationList(myPublications)
             }
             .addOnFailureListener { exception ->
-                callback.onError() // Appel onError en cas d'erreur
+                //callback.onError() // Appel onError en cas d'erreur
             }
+    }
+
+    private fun updatePublicationList(newList: List<Publication>) {
+        _publicationList.value = newList
+    }
+
+    private fun updateMyPublicationList(newList: List<Publication>) {
+        _myPublicationLists.value = newList
     }
 
     fun deleteElementById(id: String){
@@ -119,11 +127,16 @@ object Repository{
     }
 
     fun getPublicationWithId(id:String){
-        for (publication in publicationLists) {
-            if (publication.id==id){
-                pub= publication
+        publicationList.value.let {
+            if (it != null) {
+                for (publication in it) {
+                    if (publication.id==id){
+                        pub= publication
+                    }
+                }
             }
         }
+
     }
 
     fun isOnline(connMgr: ConnectivityManager): Boolean {
