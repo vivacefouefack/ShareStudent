@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginPage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context="g54490.mobg5.sharestudent.view.LoginActivity">
 
 
@@ -29,7 +29,7 @@
                 android:layout_marginLeft="@dimen/size24"
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="@dimen/size24"
-                android:text="@string/connexionText"
+                android:text="@string/loginPage"
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
@@ -40,7 +40,7 @@
 
             <EditText
                 android:id="@+id/inputEmail"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size24"
                 android:layout_marginTop="35dp"
@@ -63,10 +63,10 @@
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size24"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="@dimen/size24"
                 android:background="@color/purple_700"
                 android:onClick="@{() -> loginViewModel.checkData()}"
@@ -74,14 +74,14 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.568"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputPassword"
                 tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/inputPassword"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="58dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
@@ -110,7 +110,7 @@
                 android:layout_marginBottom="350dp"
                 android:onClick="@{() -> loginViewModel.goToRegisterUi()}"
                 android:text="@string/register"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,5 @@
 package g54490.mobg5.sharestudent.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +22,9 @@ class RegisterViewModel :ViewModel() {
     val createUser: LiveData<Boolean?>
         get() = _createUser
 
+    private val _onFailure = MutableLiveData<Boolean?>()
+    val onFailure: LiveData<Boolean?> = _onFailure
+
     private val _backToLoginUi = MutableLiveData<Boolean?>()
     val backToLoginUi: LiveData<Boolean?>
         get() = _backToLoginUi
@@ -31,7 +33,8 @@ class RegisterViewModel :ViewModel() {
         _email.value =""
         _password.value =""
         _passwordConfirm.value=""
-        //_createUser.value=null
+        _onFailure.value=false
+        _createUser.value=null
         _backToLoginUi.value=null
     }
 
@@ -48,7 +51,6 @@ class RegisterViewModel :ViewModel() {
     }
 
     fun passwordConfirmInput(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.i("insert",""+start+before+count)
         _passwordConfirm.value = s.toString()
     }
 
@@ -68,10 +70,10 @@ class RegisterViewModel :ViewModel() {
                     Repository.setUsername(_email.value.toString())
                     _createUser.value=true
                 } else {
-                    this._createUser.value=false
+                    _createUser.value=false
                 }
             }.addOnFailureListener { exception ->
-                this._createUser.value=false
+                _onFailure.value=true
             }
         }else{
             _createUser.value=false

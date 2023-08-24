@@ -24,25 +24,26 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerViewModel=registerViewModel
 
         registerViewModel.createUser.observe(this) {
-            val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (Repository.isOnline(connMgr)) {
-                if (it == true) {
-                    Toast.makeText(this@RegisterActivity, getString(R.string.newUser), Toast.LENGTH_LONG).show()
-                    binding.emailInputEt.text = null
-                    binding.passwordInputEt.text = null
-                    binding.confirmPasswordInputEt.text = null
+            if (it == true) {
+                Toast.makeText(this@RegisterActivity, getString(R.string.newUser), Toast.LENGTH_LONG).show()
+                binding.emailInputEt.text = null
+                binding.passwordInputEt.text = null
+                binding.confirmPasswordInputEt.text = null
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    setResult(RESULT_OK)
-                    finish() //Terminer l'activité RegisterActivity
-                }
-                if (it == false) {
-                    binding.emailInputEt.error = getString(R.string.invalid)
-                    binding.passwordInputEt.error = getString(R.string.invalid)
-                    binding.confirmPasswordInputEt.error = getString(R.string.invalid)
-                }
-            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                setResult(RESULT_OK)
+                finish() //Terminer l'activité RegisterActivity
+            }
+            if (it == false) {
+                binding.emailInputEt.error = getString(R.string.invalid)
+                binding.passwordInputEt.error = getString(R.string.invalid)
+                binding.confirmPasswordInputEt.error = getString(R.string.invalid)
+            }
+        }
+
+        registerViewModel.onFailure.observe(this){
+            if (it==true){
                 Toast.makeText(this@RegisterActivity,getString(R.string.connexionError), Toast.LENGTH_LONG).show()
             }
         }

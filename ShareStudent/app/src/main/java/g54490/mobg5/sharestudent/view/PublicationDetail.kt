@@ -30,7 +30,6 @@ class PublicationDetail : Fragment() {
                 sendEmail(
                     publicationDetailViewModel.publication.author,
                     publicationDetailViewModel.publication.title,
-
                 )
             }
         }
@@ -40,18 +39,17 @@ class PublicationDetail : Fragment() {
     private fun sendEmail(recipient: String, subject: String) {
         val mIntent = Intent(Intent.ACTION_SEND)
         val message=getString(R.string.message)
-        mIntent.data = Uri.parse("mailto:")
-        mIntent.type = "text/plain"
+        mIntent.data = Uri.parse(getString(R.string.mailto))
+        mIntent.type = getString(R.string.type)
         mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
-        mIntent.setPackage("com.google.android.gm")
+        mIntent.setPackage(getString(R.string.google))
         try {
             startActivity(mIntent)
         }
         catch (e: Exception){
             Toast.makeText(this.activity, getString(R.string.errorToSend), Toast.LENGTH_LONG).show()
         }
-
     }
 }
