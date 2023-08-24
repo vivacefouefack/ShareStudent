@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_profileFragment_to_home2"
             app:destination="@id/home2" />
+        <action
+            android:id="@+id/action_profileFragment_to_publicationDetailForProfil"
+            app:destination="@id/publicationDetailForProfil" />
     </fragment>
     <fragment
         android:id="@+id/logoutFragment"
@@ -60,6 +63,15 @@
         <action
             android:id="@+id/action_logoutFragment_to_home2"
             app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/publicationDetailForProfil"
+        android:name="g54490.mobg5.sharestudent.view.PublicationDetailForProfil"
+        android:label="@string/retail"
+        tools:layout="@layout/fragment_publication_detail_for_profil">
+        <action
+            android:id="@+id/action_publicationDetailForProfil_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
 </navigation>

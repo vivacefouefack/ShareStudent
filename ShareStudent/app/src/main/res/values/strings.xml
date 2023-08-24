@@ -35,6 +35,7 @@
     <string name="titreText">title</string>
     <string name="aboutText">\n \n \n  Matricule : 54490 \n \n \n \n Nom : Fouefack Atchepong \n \n \n \n  Prénom : Vivace Jibrice \n</string>
     <string name="writeToAuthor">write to the author</string>
+    <string name="delete">Delete</string>
     <string name="returne">retour</string>
     <string name="invalid">invalid</string>
     <string name="dataName">data</string>

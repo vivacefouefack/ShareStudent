@@ -97,16 +97,6 @@ object Repository{
                         document.data["description"] as String,
                         document.data["author"] as String
                     ))
-
-                    /*publicationList.value?.add(
-                        Publication(
-                            document.id,
-                            document.data["image"] as String,
-                            document.data["title"] as String,
-                            document.data["description"] as String,
-                            document.data["author"] as String
-                        )
-                    )*/
                 }
                 Log.i("check","readData")
                 Log.i("check", _publicationList.value?.size.toString())
@@ -114,6 +104,17 @@ object Repository{
             }
             .addOnFailureListener { exception ->
                 callback.onError() // Appel onError en cas d'erreur
+            }
+    }
+
+    fun deleteElementById(id: String){
+        db.collection("publication")
+            .document(id).delete()
+            .addOnSuccessListener {
+                Log.i("delete","Document supprimé avec succès")
+            }
+            .addOnFailureListener { e ->
+                Log.i("delete","Gérer l'erreur lors de la suppression")
             }
     }
 

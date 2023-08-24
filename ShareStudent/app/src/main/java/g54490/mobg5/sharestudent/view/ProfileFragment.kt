@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import g54490.mobg5.sharestudent.R
 import g54490.mobg5.sharestudent.databinding.FragmentProfileBinding
+import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.ProfileViewModel
 import g54490.mobg5.sharestudent.viewmodel.ProfileViewModelFactory
 
@@ -27,7 +29,6 @@ class ProfileFragment : Fragment() {
         val adapter = PublicationAdapter(PublicationListener { publicationId ->
             profileViewModel.onPublicationClicked(publicationId)
         })
-
         binding.mesPub.adapter=adapter
 
         profileViewModel.myPublication.observe(viewLifecycleOwner) {
@@ -35,6 +36,20 @@ class ProfileFragment : Fragment() {
                 adapter.submitList(it)
             }
         }
+
+
+        profileViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner) { publication ->
+            if (publication.isNotEmpty()) {
+                publication?.let {
+                    Repository.getPublicationWithId(it)
+                    this.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPublicationDetailForProfil())
+                    profileViewModel.onPublicationClicked("")
+                }
+            }
+        }
+
+
+
         val manager = GridLayoutManager(activity, 2)
         binding.mesPub.layoutManager = manager
         return binding.root
