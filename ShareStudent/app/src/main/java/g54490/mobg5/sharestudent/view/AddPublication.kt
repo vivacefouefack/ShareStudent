@@ -50,23 +50,24 @@ class AddPublication : Fragment() {
                 progressDialog.setTitle("Uploading...")
                 progressDialog.setMessage("Uploading your publication")
                 progressDialog.show()
-                Log.i("publish","animation terminéé")
-                if (Repository.isOnline(connMgr)){
-                    Log.i("publish","connexion activée")
-                    Repository.getStorage().getReference("images").child(addViewModel.getImageName())
-                        .putFile(imageUri).addOnSuccessListener {
-                            progressDialog.dismiss()
-                            Toast.makeText(requireContext(), "publication Uploaded", Toast.LENGTH_SHORT).show()
-                        }.addOnFailureListener {
-                            progressDialog.dismiss()
-                            Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    binding.imageView5.setImageURI(Uri.parse(""))
-                    this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
+
+                Repository.getStorage().getReference("images").child(addViewModel.getImageName())
+                    .putFile(imageUri).addOnSuccessListener {
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "publication Uploaded", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                binding.imageView5.setImageURI(Uri.parse(""))
+                this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
+
+                /*if (Repository.isOnline(connMgr)){
+
                 }else{
                     Toast.makeText(requireContext(), getString(R.string.connexionError), Toast.LENGTH_LONG).show()
-                }
+                }*/
             }
             if (it == false) {
                 binding.titre.error = getString(R.string.invalid)

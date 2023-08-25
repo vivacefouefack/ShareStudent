@@ -18,33 +18,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginPage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context="g54490.mobg5.sharestudent.view.LoginActivity">
 
             <Button
                 android:id="@+id/buttonPublier"
-                android:layout_width="0dp"
-                android:layout_height="51dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
                 android:background="@color/purple_700"
                 android:onClick="@{() -> addViewModel.checkDataAndCreatePublication()}"
                 android:text="@string/publier"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.441"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
             <TextView
                 android:id="@+id/textAjoutObjet"
-                android:layout_width="282dp"
-                android:layout_height="27dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/textAjoutObjet"
                 android:textColor="#0E0E0E"
                 android:textSize="20sp"
@@ -71,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/titreText"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:onTextChanged="@{addViewModel::titleText}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/descriptionText"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:onTextChanged="@{addViewModel::descriptionText}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +99,7 @@
                 android:layout_width="409dp"
                 android:layout_height="323dp"
                 android:layout_marginTop="16dp"
+                android:contentDescription="@string/welcomeText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -107,29 +107,29 @@
 
             <Button
                 android:id="@+id/galleryButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/gallery"
                 android:onClick="@{() -> addViewModel.setGalleryPress()}"
+                android:text="@string/gallery"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.425"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
             <Button
                 android:id="@+id/cameraButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/camera"
                 android:onClick="@{() -> addViewModel.setCameraPress()}"
+                android:text="@string/camera"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.427"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/galleryButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>

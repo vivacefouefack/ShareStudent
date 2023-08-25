@@ -19,7 +19,7 @@ class PublicationDetailForProfil : Fragment() {
     private lateinit var binding: FragmentPublicationDetailForProfilBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View {
 
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_publication_detail_for_profil, container, false)
         val viewModelFactory = DetailForProfilViewModelFactory()
@@ -34,7 +34,13 @@ class PublicationDetailForProfil : Fragment() {
                 builder.setMessage(getString(R.string.deleteMessage))
                 builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
                     detailViewModel.deletePublication()
-                    this.findNavController().navigate(PublicationDetailForProfilDirections.actionPublicationDetailForProfilToProfileFragment())
+                    if (detailViewModel.getOnFailureDelete()){
+                        context?.let { Toast.makeText(it, getString(R.string.onFailureDeleteElementById), Toast.LENGTH_SHORT).show()}
+                        detailViewModel.setOnFailureDelete()
+                    }else{
+                        detailViewModel.updatePublicationList() //mise à jour des données après la suppression
+                        findNavController().navigateUp()
+                    }
                 }
                 builder.setNegativeButton(getString(R.string.no)) { dialog, which ->
                     context?.let { Toast.makeText(it, getString(R.string.noDelete), Toast.LENGTH_SHORT).show()}
@@ -43,8 +49,6 @@ class PublicationDetailForProfil : Fragment() {
                 dialog.show()
             }
         }
-
         return binding.root
     }
-
 }

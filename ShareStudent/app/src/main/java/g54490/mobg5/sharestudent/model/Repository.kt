@@ -1,8 +1,5 @@
 package g54490.mobg5.sharestudent.model
 
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -17,8 +14,6 @@ object Repository{
         FirebaseFirestore.getInstance()
     }
     private var storage= FirebaseStorage.getInstance()
-    private var publicationLists:MutableList<Publication> = mutableListOf()
-    private var myPublicationList:MutableList<Publication> = mutableListOf()
     var pub=Publication("","","","","")
 
     private val _publicationList = MutableLiveData<List<Publication>>()
@@ -26,6 +21,15 @@ object Repository{
 
     private val _myPublicationLists = MutableLiveData<List<Publication>>()
     val myPublicationLists: LiveData<List<Publication>> = _myPublicationLists
+
+    private val _onFailureCreatePublication = MutableLiveData<Boolean>()
+    val onFailureCreatePublication: LiveData<Boolean> = _onFailureCreatePublication
+
+    private val _onFailureReadData = MutableLiveData<Boolean>()
+    val onFailureReadData: LiveData<Boolean> = _onFailureReadData
+
+    private val _onFailureDeleteElementById = MutableLiveData<Boolean>()
+    val onFailureDeleteElementById: LiveData<Boolean> = _onFailureDeleteElementById
 
     fun getUsername():String{
         return username
@@ -47,18 +51,6 @@ object Repository{
         return storage
     }
 
-    fun getMyPublications(): MutableList<Publication> {
-        return myPublicationList
-    }
-
-   private fun getmyPublication(){
-        for (publication in publicationLists) {
-            if (publication.author== username){
-                myPublicationList.add(publication)
-            }
-        }
-   }
-
     fun createPublication(pub: Publication){
         val publication = hashMapOf(
             "author" to pub.author,
@@ -67,17 +59,10 @@ object Repository{
             "title" to pub.title
         )
         db.collection("publication").add(publication)
-            .addOnSuccessListener { documentReference ->
-                Log.d("database", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
+            .addOnSuccessListener {}
             .addOnFailureListener { e ->
-                Log.w("database", "Error adding document", e)
+                _onFailureCreatePublication.value=true
             }
-    }
-
-    interface FirebaseSuccessListener {
-        fun onSuccess(publications: MutableList<Publication>)
-        fun onError()
     }
 
     fun readData() {
@@ -85,7 +70,7 @@ object Repository{
             .get().addOnSuccessListener { result ->
                 val publications = mutableListOf<Publication>()
                 val myPublications = mutableListOf<Publication>()
-                var publicationElt=Publication("","","","","")
+                var publicationElt: Publication
                 for (document in result) {
                     publicationElt=Publication(
                         document.id,
@@ -102,8 +87,8 @@ object Repository{
                 updatePublicationList(publications)
                 updateMyPublicationList(myPublications)
             }
-            .addOnFailureListener { exception ->
-                //callback.onError() // Appel onError en cas d'erreur
+            .addOnFailureListener {
+                _onFailureReadData.value=true
             }
     }
 
@@ -118,11 +103,9 @@ object Repository{
     fun deleteElementById(id: String){
         db.collection("publication")
             .document(id).delete()
-            .addOnSuccessListener {
-                Log.i("delete","Document supprimé avec succès")
-            }
-            .addOnFailureListener { e ->
-                Log.i("delete","Gérer l'erreur lors de la suppression")
+            .addOnSuccessListener {}
+            .addOnFailureListener {
+                _onFailureDeleteElementById.value=true
             }
     }
 
@@ -137,12 +120,6 @@ object Repository{
             }
         }
 
-    }
-
-    fun isOnline(connMgr: ConnectivityManager): Boolean {
-        //FIXME (QHB) : don't user deprecated methods
-        val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
-        return networkInfo?.isConnected == true
     }
 }
 

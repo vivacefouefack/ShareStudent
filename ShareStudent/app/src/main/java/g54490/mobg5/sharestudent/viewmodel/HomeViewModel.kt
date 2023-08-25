@@ -11,8 +11,11 @@ class HomeViewModel:ViewModel() {
     private val _allPublication = MutableLiveData<List<Publication>>()
     val allPublication: LiveData<List<Publication>> = _allPublication
 
-    private var _addPublication = MutableLiveData<Boolean?>()
-    val addPublication: LiveData<Boolean?>
+    private val _onFailureReadData=MutableLiveData<Boolean>()
+    val onFailureReadData: LiveData<Boolean> =_onFailureReadData
+
+    private var _addPublication = MutableLiveData<Boolean>()
+    val addPublication: LiveData<Boolean>
         get() = _addPublication
 
     private val _navigateToPublicationDetail = MutableLiveData<String>()
@@ -20,12 +23,15 @@ class HomeViewModel:ViewModel() {
         get() = _navigateToPublicationDetail
 
 
+
     init {
         loadPublicationsFromFirebase()
         Repository.publicationList.observeForever{
             _allPublication.postValue(it)
         }
-        _addPublication.value=null
+        Repository.onFailureReadData.observeForever {
+            _onFailureReadData.postValue(true)
+        }
     }
 
     fun onPublicationClicked(id: String) {
@@ -42,5 +48,9 @@ class HomeViewModel:ViewModel() {
 
     fun goToAddPublicationUi(){
         _addPublication.value=true
+    }
+
+    fun findPublicationById(id: String) {
+        Repository.getPublicationWithId(id)
     }
 }

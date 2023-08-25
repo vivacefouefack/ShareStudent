@@ -56,4 +56,10 @@
     <string name="message">je suis interessé par  la publication,est ce qu\'elle est toujours disponible?</string>
     <string name="drawer">drawer</string>
     <string name="mes_publicationsText">mes publications :</string>
+    <string name="logout">se déconnecter</string>
+    <string name="sh_re_student"> Sh     re Student</string>
+    <string name="filter">filtre</string>
+    <string name="onFailureCreatePublication">échec de création</string>
+    <string name="onFailureReadData">échec de lecture</string>
+    <string name="onFailureDeleteElementById">échec de suppression</string>
 </resources>

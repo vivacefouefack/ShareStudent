@@ -1,8 +1,8 @@
 package g54490.mobg5.sharestudent.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import g54490.mobg5.sharestudent.R
-import g54490.mobg5.sharestudent.model.Repository
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModel
 import g54490.mobg5.sharestudent.viewmodel.HomeViewModelFactory
 import g54490.mobg5.sharestudent.databinding.FragmentHomeBinding
@@ -30,7 +29,6 @@ class HomeFragment : Fragment() {
         binding.publicationList.adapter= adapter
         binding.lifecycleOwner = this
         binding.homeViewModel=homeViewModel
-
         homeViewModel.allPublication.observe(viewLifecycleOwner) {
             it?.let {
                 if (it.isNotEmpty()){
@@ -49,10 +47,16 @@ class HomeFragment : Fragment() {
         homeViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner) { publication ->
             if (publication.isNotEmpty()) {
                 publication?.let {
-                    Repository.getPublicationWithId(it)
+                    homeViewModel.findPublicationById(it)
                     this.findNavController().navigate(HomeFragmentDirections.actionHome2ToPublicationDetail())
                     homeViewModel.onPublicationClicked("")
                 }
+            }
+        }
+
+        homeViewModel.onFailureReadData.observe(viewLifecycleOwner){
+            if (it==true){
+                context?.let { Toast.makeText(it, getString(R.string.onFailureReadData), Toast.LENGTH_SHORT).show()}
             }
         }
 

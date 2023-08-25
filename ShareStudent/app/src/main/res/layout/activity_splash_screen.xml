@@ -15,6 +15,7 @@
         android:rotation="-4"
         android:rotationX="-17"
         android:rotationY="4"
+        android:contentDescription="@string/welcomeText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +24,10 @@
 
     <TextView
         android:id="@+id/splashScreen_name"
-        android:layout_width="310dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:rotationY="21"
-        android:text=" Sh     re Student"
+        android:text="@string/sh_re_student"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="40sp"
