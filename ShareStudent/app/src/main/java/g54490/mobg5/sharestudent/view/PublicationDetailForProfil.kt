@@ -29,7 +29,9 @@ class PublicationDetailForProfil : Fragment() {
 
         var connectionIssue=false
         detailViewModel.onFailureDeleteElementById.observe(viewLifecycleOwner) {
-            connectionIssue=true
+            if(it==true){
+                connectionIssue=true
+            }
         }
 
         detailViewModel.canDelete.observe(viewLifecycleOwner){
