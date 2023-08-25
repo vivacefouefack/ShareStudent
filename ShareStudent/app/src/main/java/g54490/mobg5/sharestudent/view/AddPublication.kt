@@ -2,16 +2,12 @@ package g54490.mobg5.sharestudent.view
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
-import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +26,7 @@ import g54490.mobg5.sharestudent.viewmodel.AddViewModelFactory
 class AddPublication : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private lateinit var binding:FragmentAddPublicationBinding
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri=Uri.EMPTY
     private val code=100
     private val galleryCode=200
 
@@ -41,33 +37,29 @@ class AddPublication : Fragment() {
         val addViewModelFactory= AddViewModelFactory(requireContext())
         addViewModel= ViewModelProvider(this,addViewModelFactory)[AddViewModel::class.java]
         binding.addViewModel=addViewModel
-        val connMgr = this.requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        var connectionIssue=false
+        addViewModel.onFailureCreatePublication.observe(viewLifecycleOwner) {
+            if(it==true){
+                connectionIssue=true
+            }
+        }
 
         addViewModel.publishPress.observe(viewLifecycleOwner) {
             if (it == true) {
-                Log.i("publish","correct form")
-                val progressDialog = ProgressDialog(requireContext())
-                progressDialog.setTitle("Uploading...")
-                progressDialog.setMessage("Uploading your publication")
-                progressDialog.show()
-
-                Repository.getStorage().getReference("images").child(addViewModel.getImageName())
-                    .putFile(imageUri).addOnSuccessListener {
-                        progressDialog.dismiss()
-                        Toast.makeText(requireContext(), "publication Uploaded", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener {
-                        progressDialog.dismiss()
-                        Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                binding.imageView5.setImageURI(Uri.parse(""))
-                this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
-
-                /*if (Repository.isOnline(connMgr)){
-
+                if (connectionIssue){
+                    Toast.makeText(requireContext(), getString(R.string.onFailureCreatePublication), Toast.LENGTH_LONG).show()
+                    connectionIssue=false
                 }else{
-                    Toast.makeText(requireContext(), getString(R.string.connexionError), Toast.LENGTH_LONG).show()
-                }*/
+                    Repository.getStorage().getReference("images").child(addViewModel.getImageName())
+                        .putFile(imageUri).addOnSuccessListener {
+                            binding.imageView5.setImageURI(Uri.parse(""))
+                            this.findNavController().navigate(AddPublicationDirections.actionAddPublication2ToHome2())
+                        }.addOnFailureListener {
+                            Toast.makeText(requireContext(), "Fail to Upload Image..", Toast.LENGTH_SHORT).show()
+                        }
+
+                }
             }
             if (it == false) {
                 binding.titre.error = getString(R.string.invalid)

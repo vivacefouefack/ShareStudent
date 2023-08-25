@@ -27,6 +27,11 @@ class PublicationDetailForProfil : Fragment() {
         binding.viewModel=detailViewModel
         binding.lifecycleOwner = this
 
+        var connectionIssue=false
+        detailViewModel.onFailureDeleteElementById.observe(viewLifecycleOwner) {
+            connectionIssue=true
+        }
+
         detailViewModel.canDelete.observe(viewLifecycleOwner){
             if (it==true){
                 val builder = AlertDialog.Builder(requireContext())
@@ -34,9 +39,9 @@ class PublicationDetailForProfil : Fragment() {
                 builder.setMessage(getString(R.string.deleteMessage))
                 builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
                     detailViewModel.deletePublication()
-                    if (detailViewModel.getOnFailureDelete()){
+                    if (connectionIssue){
                         context?.let { Toast.makeText(it, getString(R.string.onFailureDeleteElementById), Toast.LENGTH_SHORT).show()}
-                        detailViewModel.setOnFailureDelete()
+                        connectionIssue=false
                     }else{
                         detailViewModel.updatePublicationList() //mise à jour des données après la suppression
                         findNavController().navigateUp()

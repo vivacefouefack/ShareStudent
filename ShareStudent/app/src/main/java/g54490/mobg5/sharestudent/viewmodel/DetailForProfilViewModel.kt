@@ -15,26 +15,17 @@ class DetailForProfilViewModel : ViewModel(){
     val canDelete: LiveData<Boolean>
         get() = _canDelete
 
-    private var onFailureDeleteElementById:Boolean = false
+    private val _onFailureDeleteElementById = MutableLiveData<Boolean>()
+    val onFailureDeleteElementById: LiveData<Boolean> = _onFailureDeleteElementById
 
     init {
         Repository.onFailureDeleteElementById.observeForever {
-            if (it==true){
-                onFailureDeleteElementById=true
-            }
+            _onFailureDeleteElementById.postValue(true)
         }
     }
 
     fun setCanDelete() {
         _canDelete.value = true
-    }
-
-    fun getOnFailureDelete():Boolean {
-        return onFailureDeleteElementById
-    }
-
-    fun setOnFailureDelete(){
-        onFailureDeleteElementById=false
     }
 
     fun deletePublication(){

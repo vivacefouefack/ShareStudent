@@ -10,8 +10,6 @@ class ProfileViewModel: ViewModel(){
     val login: String
         get() = Repository.getUsername()
 
-    var nbPublication: String = ""
-
     private val _myNbPublication = MutableLiveData<String>()
     val myNbPublication: LiveData<String> = _myNbPublication
 
@@ -37,4 +35,7 @@ class ProfileViewModel: ViewModel(){
         Repository.readData()
     }
 
+    fun findPublicationById(id: String) {
+        Repository.getPublicationWithId(id)
+    }
 }

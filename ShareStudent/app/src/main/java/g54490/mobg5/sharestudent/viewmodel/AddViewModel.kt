@@ -45,6 +45,9 @@ class AddViewModel(private val context: Context):ViewModel() {
     private var imageName=System.currentTimeMillis().toString()+".jpg"
     var captureImageUri: Uri=Uri.EMPTY
 
+    private val _onFailureCreatePublication = MutableLiveData<Boolean>()
+    val onFailureCreatePublication: LiveData<Boolean> = _onFailureCreatePublication
+
     init {
         userlog= Repository.getUsername()
         _title.value =""
@@ -52,6 +55,10 @@ class AddViewModel(private val context: Context):ViewModel() {
         _publishPress.value=null
         _galleryPress.value=null
         _cameraPress.value=null
+        _onFailureCreatePublication.value=false
+        Repository.onFailureCreatePublication.observeForever {
+            _onFailureCreatePublication.postValue(true)
+        }
     }
 
     fun titleText(s: CharSequence, start: Int, before: Int, count: Int) {

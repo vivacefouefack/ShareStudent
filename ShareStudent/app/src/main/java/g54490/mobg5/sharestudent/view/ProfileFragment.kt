@@ -40,7 +40,7 @@ class ProfileFragment : Fragment() {
         profileViewModel.navigateToPublicationDetail.observe(viewLifecycleOwner) { publication ->
             if (publication.isNotEmpty()) {
                 publication?.let {
-                    Repository.getPublicationWithId(it)
+                    profileViewModel.findPublicationById(it)
                     this.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPublicationDetailForProfil())
                     profileViewModel.onPublicationClicked("")
                 }

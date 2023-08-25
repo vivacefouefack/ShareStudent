@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/purple_700"
                 android:onClick="@{() -> addViewModel.checkDataAndCreatePublication()}"
@@ -34,7 +34,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.441"
+                app:layout_constraintHorizontal_bias="0.973"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
@@ -90,8 +90,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/descriptionText"
                     android:inputType="text"
-                    android:textColor="@color/black"
-                    android:onTextChanged="@{addViewModel::descriptionText}" />
+                    android:onTextChanged="@{addViewModel::descriptionText}"
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -110,12 +110,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:onClick="@{() -> addViewModel.setGalleryPress()}"
                 android:text="@string/gallery"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.425"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
@@ -124,14 +124,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:onClick="@{() -> addViewModel.setCameraPress()}"
                 android:text="@string/camera"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.427"
+                app:layout_constraintHorizontal_bias="0.459"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/galleryButton" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
