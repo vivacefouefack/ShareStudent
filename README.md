@@ -1,4 +1,4 @@
-# Projet MOBG5
+# Projet Share Student
 
 Ce dépôt contient les sources du projet "share student".
 
